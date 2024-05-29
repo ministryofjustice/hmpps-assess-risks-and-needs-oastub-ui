@@ -1,6 +1,6 @@
 # hmpps-assess-risks-and-needs-oastub-ui
-[![repo standards badge](https://img.shields.io/badge/endpoint.svg?&style=flat&logo=github&url=https%3A%2F%2Foperations-engineering-reports.cloud-platform.service.justice.gov.uk%2Fapi%2Fv1%2Fcompliant_public_repositories%2Fhmpps-template-typescript)](https://operations-engineering-reports.cloud-platform.service.justice.gov.uk/public-github-repositories.html#hmpps-template-typescript "Link to report")
-[![CircleCI](https://circleci.com/gh/ministryofjustice/hmpps-template-typescript/tree/main.svg?style=svg)](https://circleci.com/gh/ministryofjustice/hmpps-template-typescript)
+[![repo standards badge](https://img.shields.io/badge/endpoint.svg?&style=flat&logo=github&url=https%3A%2F%2Foperations-engineering-reports.cloud-platform.service.justice.gov.uk%2Fapi%2Fv1%2Fcompliant_public_repositories%2Fhmpps-assess-risks-and-needs-oastub-ui)](https://operations-engineering-reports.cloud-platform.service.justice.gov.uk/public-github-repositories.html#hmpps-assess-risks-and-needs-oastub-ui "Link to report")
+[![CircleCI](https://circleci.com/gh/ministryofjustice/hmpps-assess-risks-and-needs-oastub-ui/tree/main.svg?style=svg)](https://circleci.com/gh/ministryofjustice/hmpps-assess-risks-and-needs-oastub-ui)
 
 HMPPS Assess Risks and Needs (ARNS) OAStub is a small UI webservice that provides staff within the ARNS space to simulate the outcome of an OASys journey and begin the flow through the HMPPS ARNS Handover Service into one of the ARNS space applications (HMPPS Sentence Plan, HMPPS Strength Based Needs Assessment etc.)
 
@@ -12,7 +12,7 @@ see https://github.com/ministryofjustice/hmpps-project-bootstrap. You are able t
 This bootstrap is community managed by the mojdt `#typescript` slack channel. 
 Please raise any questions or queries there. Contributions welcome!
 
-Our security policy is located [here](https://github.com/ministryofjustice/hmpps-template-typescript/security/policy). 
+Our security policy is located [here](https://github.com/ministryofjustice/hmpps-assess-risks-and-needs-oastub-ui/security/policy). 
 
 More information about the template project including features can be found [here](https://dsdmoj.atlassian.net/wiki/spaces/NDSS/pages/3488677932/Typescript+template+project).
 
@@ -20,7 +20,7 @@ More information about the template project including features can be found [her
 
 When deploying to a new namespace, you may wish to use this template typescript project namespace as the basis for your new namespace:
 
-<https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/hmpps-template-typescript>
+<https://github.com/ministryofjustice/cloud-platform-environments/tree/main/namespaces/live.cloud-platform.service.justice.gov.uk/hmpps-assess-risks-and-needs-oastub-ui>
 
 This template namespace includes an AWS elasticache setup - which is required by this template project.
 

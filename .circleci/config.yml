@@ -9,12 +9,12 @@ parameters:
     type: string
     # Normally team specific alert channel e.g. hmpps_tech_alerts, syscon-alerts, dps_sed_alerts
     # This is to avoid a general alert dumping ground that no-one then monitors
-    default: PIPELINE_SECURITY_SLACK_CHANNEL
+    default: hmpps-assessments-notifications
 
   releases-slack-channel:
     type: string
     # Normally dps-releases for most teams / projects
-    default: SLACK_RELEASES_CHANNEL
+    default: hmpps-assessments-notifications
 
   node-version:
     type: string
@@ -159,7 +159,7 @@ workflows:
 #          pipeline_number: <<pipeline.number>>
 #          context:
 #            - hmpps-common-vars
-#            - hmpps-template-typescript-preprod
+#            - hmpps-assess-risks-and-needs-oastub-ui-preprod
 #          requires:
 #            - request-preprod-approval
 #          helm_timeout: 5m
@@ -178,7 +178,7 @@ workflows:
 #          slack_channel_name: << pipeline.parameters.releases-slack-channel >>
 #          context:
 #            - hmpps-common-vars
-#            - hmpps-template-typescript-prod
+#            - hmpps-assess-risks-and-needs-oastub-ui-prod
 #          requires:
 #            - request-prod-approval
 #          helm_timeout: 5m
