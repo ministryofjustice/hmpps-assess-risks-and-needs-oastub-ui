@@ -1,6 +1,6 @@
 generic-service:
   nameOverride: hmpps-assess-risks-and-needs-oastub-ui
-  productId: "" # productId for the product that this belongs too, i.e. DPS001, see README.md for details
+  productId: "HMPPS509" # productId for the product that this belongs too, i.e. DPS001, see README.md for details
 
   # the IRSA service account name for accessing AWS resources
   # serviceAccountName: "hmpps-assess-risks-and-needs-oastub-ui"
