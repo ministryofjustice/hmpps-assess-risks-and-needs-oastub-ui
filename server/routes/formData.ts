@@ -45,7 +45,7 @@ export default {
   },
   sanClient: {
     clientId: config.apis.handoverApi.sanClientId,
-    text: 'SAN',
+    text: 'Strengths and Needs Assessment',
   },
   spClient: {
     clientId: config.apis.handoverApi.spClientId,

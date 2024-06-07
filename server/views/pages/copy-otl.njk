@@ -18,7 +18,7 @@
 
         {{ govukInput({
           label: {
-            text: "One time link"
+            text: "Handover link"
           },
           id: "one-time-link",
           name: "one-time-link",
@@ -29,19 +29,26 @@
         <div id="one-time-link-notification" class="govuk-visually-hidden">
           {{ mojBanner({
             type: 'success',
-            text: 'One time link has been copied',
+            text: 'Handover link has been copied',
             iconFallbackText: 'Success'
           }) }}
         </div>
-        <button id="one-time-link-copy" class="govuk-button" data-module="govuk-button">
-          Copy to clipboard
-        </button>
-        <a href="{{data.link}}" target="_blank">
 
-          <button id="one-time-link-copy" class="govuk-button" data-module="govuk-button">
-            Open
-          </button>
-        </a>
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Open",
+            href: data.link,
+            attributes: {
+              target: "_blank"
+            }
+          }) }}
+
+          {{ govukButton({
+            id: "one-time-link-copy",
+            text: "Copy to clipboard",
+            classes: "govuk-button--secondary"
+          }) }}
+        </div>
       </div>
     </div>
 
