@@ -25,6 +25,7 @@ export default function routes({ auditService, arnsService, handoverService }: S
       givenName = 'Bruce',
       familyName = 'Banner',
       sexuallyMotivatedOffenceHistory = 'NO',
+      app,
     } = req.body
     const payload = { oasysAssessmentPk, gender, givenName, familyName, sexuallyMotivatedOffenceHistory }
     const { sanAssessmentId } = await arnsService.createAssessment({ oasysAssessmentPk })
@@ -52,7 +53,7 @@ export default function routes({ auditService, arnsService, handoverService }: S
       },
     }
 
-    const link = await handoverService.createHandoverLink(handoverContext)
+    const link = await handoverService.createHandoverLink(handoverContext, app)
     res.render('pages/copy-otl', { data: { link, payload: JSON.stringify(payload) } })
   })
 

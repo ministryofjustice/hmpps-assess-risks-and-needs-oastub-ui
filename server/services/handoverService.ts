@@ -9,12 +9,12 @@ export default class HandoverService {
     return new RestClient('Handover Api Client', config.apis.handoverApi, token)
   }
 
-  async createHandoverLink(handoverContext: Record<string, unknown>) {
+  async createHandoverLink(handoverContext: Record<string, unknown>, clientId: string) {
     const token = await this.authClient.getSystemClientToken()
     const handover = await HandoverService.restClient(token).post<{ handoverLink: string }>({
       path: '/handover',
       data: handoverContext,
     })
-    return `${handover.handoverLink}?clientId=${config.apis.handoverApi.clientId}`
+    return `${handover.handoverLink}?clientId=${clientId}`
   }
 }

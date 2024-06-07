@@ -109,8 +109,8 @@ export default {
         deadline: Number(get('HMPPS_ARNS_HANDOVER_TIMEOUT_DEADLINE', 10000)),
       },
       agent: new AgentConfig(Number(get('HMPPS_ARNS_HANDOVER_TIMEOUT_RESPONSE', 10000))),
-      clientId: get('HANDOVER_CLIENT_ID', 'clientid', requiredInProduction),
-      clientSecret: get('HANDOVER_CLIENT_SECRET', 'clientsecret', requiredInProduction),
+      sanClientId: get('SAN_HANDOVER_CLIENT_ID', 'strengths-and-needs-assessment'),
+      spClientId: get('SP_HANDOVER_CLIENT_ID', 'sentence-plan'),
     },
   },
   sqs: {
@@ -118,6 +118,4 @@ export default {
   },
   domain: get('INGRESS_URL', 'http://localhost:3000', requiredInProduction),
   environmentName: get('ENVIRONMENT_NAME', ''),
-  SP_URL: get('SP_URL', ''),
-  SAN_URL: get('SAN_URL', ''),
 }

@@ -43,12 +43,12 @@ export default {
       { text: 'Yes', value: 'YES', kind: 'option' },
     ],
   },
-  san_url: {
-    url: config.SAN_URL,
+  sanClient: {
+    clientId: config.apis.handoverApi.sanClientId,
     text: 'SAN',
   },
-  sp_url: {
-    url: config.SP_URL,
+  spClient: {
+    clientId: config.apis.handoverApi.spClientId,
     text: 'Sentence plan',
   },
 }
