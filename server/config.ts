@@ -70,7 +70,7 @@ export default {
   apis: {
     hmppsAuth: {
       url: get('HMPPS_AUTH_URL', 'http://localhost:9090/auth', requiredInProduction),
-      externalUrl: get('HMPPS_AUTH_EXTERNAL_URL', get('HMPPS_AUTH_URL', 'http://localhost:9090/auth')),
+      externalUrl: get('HMPPS_AUTH_EXTERNAL_URL', get('HMPPS_AUTH_URL', 'http://localhost:9091/auth')),
       timeout: {
         response: Number(get('HMPPS_AUTH_TIMEOUT_RESPONSE', 10000)),
         deadline: Number(get('HMPPS_AUTH_TIMEOUT_DEADLINE', 10000)),
@@ -89,6 +89,28 @@ export default {
       },
       agent: new AgentConfig(Number(get('TOKEN_VERIFICATION_API_TIMEOUT_RESPONSE', 5000))),
       enabled: get('TOKEN_VERIFICATION_ENABLED', 'false') === 'true',
+    },
+    arnsApi: {
+      url: get('SBNA_API_URL', 'http://localhost:8080', requiredInProduction),
+      timeout: {
+        response: Number(get('SBNA_API_TIMEOUT_RESPONSE', 10000)),
+        deadline: Number(get('SBNA_API_TIMEOUT_DEADLINE', 10000)),
+      },
+      agent: new AgentConfig(Number(get('SBNA_API_TIMEOUT_RESPONSE', 10000))),
+    },
+    handoverApi: {
+      url: get('HMPPS_ARNS_HANDOVER_URL', 'http://localhost:7070/oauth2/authorize', requiredInProduction),
+      externalUrl: get(
+        'HMPPS_ARNS_HANDOVER_EXTERNAL_URL',
+        get('HMPPS_ARNS_HANDOVER_URL', 'http://localhost:9090/auth'),
+      ),
+      timeout: {
+        response: Number(get('HMPPS_ARNS_HANDOVER_TIMEOUT_RESPONSE', 10000)),
+        deadline: Number(get('HMPPS_ARNS_HANDOVER_TIMEOUT_DEADLINE', 10000)),
+      },
+      agent: new AgentConfig(Number(get('HMPPS_ARNS_HANDOVER_TIMEOUT_RESPONSE', 10000))),
+      sanClientId: get('SAN_HANDOVER_CLIENT_ID', 'strengths-and-needs-assessment'),
+      spClientId: get('SP_HANDOVER_CLIENT_ID', 'sentence-plan'),
     },
   },
   sqs: {

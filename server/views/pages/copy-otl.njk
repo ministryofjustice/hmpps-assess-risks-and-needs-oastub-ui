@@ -1,0 +1,53 @@
+{% extends "../partials/layout.njk" %}
+{%- from "govuk/components/input/macro.njk" import govukInput -%}
+{%- from "govuk/components/button/macro.njk" import govukButton -%}
+{%- from "moj/components/banner/macro.njk" import mojBanner -%}
+
+{% set hideBackLink = true %}
+
+{% block header %}
+  {% include "../partials/header.njk" %}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+      <div>
+        <h1 class="govuk-heading-l">{{ options.pageTitle }}</h1>
+ 
+
+        {{ govukInput({
+          label: {
+            text: "One time link"
+          },
+          id: "one-time-link",
+          name: "one-time-link",
+          disabled: true,
+          value: data.link
+        }) }}
+
+        <div id="one-time-link-notification" class="govuk-visually-hidden">
+          {{ mojBanner({
+            type: 'success',
+            text: 'One time link has been copied',
+            iconFallbackText: 'Success'
+          }) }}
+        </div>
+        <button id="one-time-link-copy" class="govuk-button" data-module="govuk-button">
+          Copy to clipboard
+        </button>
+        <a href="{{data.link}}" target="_blank">
+
+          <button id="one-time-link-copy" class="govuk-button" data-module="govuk-button">
+            Open
+          </button>
+        </a>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}
+
+{% block bodyEnd %}
+  <script src="/assets/otl.js"></script>
+{% endblock %}
