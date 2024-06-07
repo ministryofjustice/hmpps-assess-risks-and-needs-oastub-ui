@@ -7,7 +7,7 @@ import type { Services } from '../services'
 import fields from './formData'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function routes({ auditService, arnsService, handoverService }: Services): Router {
+export default function routes({ arnsService, handoverService }: Services): Router {
   const router = Router()
   const get = (path: string | string[], handler: RequestHandler) => router.get(path, asyncMiddleware(handler))
   const post = (path: string | string[], handler: RequestHandler) => router.post(path, asyncMiddleware(handler))
