@@ -2,6 +2,7 @@
 {%- from "govuk/components/input/macro.njk" import govukInput -%}
 {%- from "govuk/components/button/macro.njk" import govukButton -%}
 {%- from "moj/components/banner/macro.njk" import mojBanner -%}
+{% from "../partials/notifications.njk" import notifications %}
 
 {% set hideBackLink = true %}
 
@@ -10,12 +11,17 @@
 {% endblock %}
 
 {% block content %}
+  {{ notifications() }}
+
+
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
-      <div>
-        <h1 class="govuk-heading-l">{{ options.pageTitle }}</h1>
- 
+      <h1 class="govuk-heading-l">
+        Launch into {{ data.targetService }}
+      </h1>
 
+      <div>
         {{ govukInput({
           label: {
             text: "Handover link"
@@ -25,14 +31,6 @@
           disabled: true,
           value: data.link
         }) }}
-
-        <div id="one-time-link-notification" class="govuk-visually-hidden">
-          {{ mojBanner({
-            type: 'success',
-            text: 'Handover link has been copied',
-            iconFallbackText: 'Success'
-          }) }}
-        </div>
 
         <div class="govuk-button-group">
           {{ govukButton({
@@ -44,7 +42,7 @@
           }) }}
 
           {{ govukButton({
-            id: "one-time-link-copy",
+            id: "one-time-link-copy-btn",
             text: "Copy to clipboard",
             classes: "govuk-button--secondary"
           }) }}
@@ -53,8 +51,4 @@
     </div>
 
   </div>
-{% endblock %}
-
-{% block bodyEnd %}
-  <script src="/assets/otl.js"></script>
 {% endblock %}

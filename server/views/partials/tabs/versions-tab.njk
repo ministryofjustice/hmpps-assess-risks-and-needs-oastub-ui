@@ -1,0 +1,31 @@
+{%- from "govuk/components/input/macro.njk" import govukInput -%}
+
+{% macro versionsTab(options, fakerData) %}
+
+
+    {{ govukInput({
+        label: {
+            text: options.fields["assessment-version"].text,
+            classes: "govuk-label--m"
+        },
+        classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+        id: options.fields["assessment-version"].code,
+        name: options.fields["assessment-version"].code,
+        hint: options.fields["assessment-version"].hint,
+        attributes: {'data-input-group': 'versions' },
+        value: fakerData.versions.assessmentUuid
+    }) }}
+
+    {{ govukInput({
+        label: {
+            text: options.fields["sentence-plan-version"].text,
+            classes: "govuk-label--m"
+        },
+        classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+        id: options.fields["sentence-plan-version"].code,
+        name: options.fields["sentence-plan-version"].code,
+        hint: options.fields["sentence-plan-version"].hint,
+        attributes: {'data-input-group': 'versions' },
+        value: fakerData.versions.assessmentUuid
+    }) }}
+{% endmacro %}
