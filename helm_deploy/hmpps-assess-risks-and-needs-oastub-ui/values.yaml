@@ -34,8 +34,6 @@ generic-service:
     APPLICATIONINSIGHTS_CONNECTION_STRING: "InstrumentationKey=$(APPINSIGHTS_INSTRUMENTATIONKEY);IngestionEndpoint=https://northeurope-0.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/"
     AUDIT_SQS_REGION: "eu-west-2"
     AUDIT_SERVICE_NAME: "" # Your audit service name
-    SAN_URL:"https://strengths-based-needs-assessments-dev.hmpps.service.justice.gov.uk/form/sbna-poc/1/0/accommodation"
-    SP_URL:"https://sentence-plan-dev.hmpps.service.justice.gov.uk/"
 
   # Pre-existing kubernetes secrets to load as environment variables in the deployment.
   # namespace_secrets:
@@ -45,12 +43,10 @@ generic-service:
   namespace_secrets:
     hmpps-assess-risks-and-needs-oastub-ui:
       APPINSIGHTS_INSTRUMENTATIONKEY: "APPINSIGHTS_INSTRUMENTATIONKEY"
-      API_CLIENT_ID: "API_CLIENT_ID"
-      API_CLIENT_SECRET: "API_CLIENT_SECRET"
       SYSTEM_CLIENT_ID: "SYSTEM_CLIENT_ID"
       SYSTEM_CLIENT_SECRET: "SYSTEM_CLIENT_SECRET"
       SESSION_SECRET: "SESSION_SECRET"
-    elasticache-redis:
+    hmpps-assess-risks-and-needs-handover-service-elasticache-redis:
       REDIS_HOST: "primary_endpoint_address"
       REDIS_AUTH_TOKEN: "auth_token"
     #sqs-hmpps-audit-secret:
