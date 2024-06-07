@@ -19,13 +19,18 @@ import HmppsAuditClient from './hmppsAuditClient'
 
 type RestClientBuilder<T> = (token: string) => T
 
-export const dataAccess = () => ({
-  applicationInfo,
-  hmppsAuthClient: new HmppsAuthClient(
+export const dataAccess = () => {
+  const hmppsAuthClient = new HmppsAuthClient(
     config.redis.enabled ? new RedisTokenStore(createRedisClient()) : new InMemoryTokenStore(),
-  ),
-  hmppsAuditClient: new HmppsAuditClient(config.sqs.audit),
-})
+  )
+  const hmppsAuditClient = new HmppsAuditClient(config.sqs.audit)
+
+  return {
+    applicationInfo,
+    hmppsAuthClient,
+    hmppsAuditClient,
+  }
+}
 
 export type DataAccess = ReturnType<typeof dataAccess>
 
