@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid'
 import routes from '../index'
 import nunjucksSetup from '../../utils/nunjucksSetup'
 import errorHandler from '../../errorHandler'
-import * as auth from '../../authentication/auth'
 import type { Services } from '../../services'
 import type { ApplicationInfo } from '../../applicationInfo'
 import AuditService from '../../services/auditService'
@@ -72,6 +71,5 @@ export function appWithAllRoutes({
   services?: Partial<Services>
   userSupplier?: () => HmppsUser
 }): Express {
-  auth.default.authenticationMiddleware = () => (req, res, next) => next()
   return appSetup(services as Services, production, userSupplier)
 }
