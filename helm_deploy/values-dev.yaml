@@ -5,15 +5,30 @@ generic-service:
   replicaCount: 2
 
   ingress:
-    host: hmpps-assess-risks-and-needs-oastub-ui-dev.hmpps.service.justice.gov.uk
+    host: arns-oastub-dev.hmpps.service.justice.gov.uk
 
   env:
-    INGRESS_URL: "https://hmpps-assess-risks-and-needs-oastub-ui-dev.hmpps.service.justice.gov.uk"
+    INGRESS_URL: "https://arns-oastub-dev.hmpps.service.justice.gov.uk"
     HMPPS_AUTH_URL: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth"
     TOKEN_VERIFICATION_API_URL: "https://token-verification-api-dev.prison.service.justice.gov.uk"
     HMPPS_ARNS_HANDOVER_URL: "https://arns-handover-service-dev.hmpps.service.justice.gov.uk"
     ENVIRONMENT_NAME: DEV
     AUDIT_ENABLED: "false"
+
+  allowlist:
+    capita-dev: 51.104.16.30/31
+    captia-further: 172.167.141.40/32
+    neil-test: 51.155.102.238/32
+    capita-developers-vms-one: 85.115.52.180/32
+    capita-developers-vms-two: 85.115.52.200/29
+    capita-developers-vms-three: 85.115.53.180/32
+    capita-developers-vms-four: 85.115.53.200/29
+    capita-developers-vms-five: 85.115.54.180/32
+    capita-developers-vms-six: 85.115.54.200/29
+    groups:
+      - circleci
+      - internal
+      - prisons
 
 generic-prometheus-alerts:
   alertSeverity: 
