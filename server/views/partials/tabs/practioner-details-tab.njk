@@ -1,0 +1,41 @@
+{%- from "govuk/components/input/macro.njk" import govukInput -%}
+{%- from "govuk/components/select/macro.njk" import govukSelect -%}
+
+{% macro practionerDetailsTab(options, fakerData) %}
+    {{ govukInput({
+        label: {
+            text: options.fields["identifier"].text,
+            classes: "govuk-label--m"
+        },
+        id: options.fields["identifier"].code,
+        name: options.fields["identifier"].code,
+        hint: options.fields["identifier"].hint,
+        attributes: {'data-input-group': 'user' },
+        value: fakerData.user.identifier
+    }) }}
+
+    {{ govukInput({
+        label: {
+            text: options.fields["display-name"].text,
+            classes: "govuk-label--m"
+        },
+        id: options.fields["display-name"].code,
+        name: options.fields["display-name"].code,
+        hint: options.fields["display-name"].hint,
+        attributes: {'data-input-group': 'user' },
+        value: fakerData.user.displayName
+    }) }}
+
+    {{ govukSelect({
+        label: {
+            text: options.fields["access-mode"].text,
+            classes: "govuk-label--m"
+        },
+        id: options.fields["access-mode"].code,
+        name: options.fields["access-mode"].code,
+        hint: options.fields["access-mode"].hint,
+        items: options.fields["access-mode"].options,
+        attributes: {'data-input-group': 'user' },
+        value: fakerData.user.accessMode
+    }) }}
+{% endmacro %}

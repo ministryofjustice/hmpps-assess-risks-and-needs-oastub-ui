@@ -11,6 +11,10 @@ export interface CreateAssessmentResponse {
 }
 export interface CreateAssessmentRequest extends Record<string, unknown> {
   oasysAssessmentPk: string
+  userDetails: {
+    id: string
+    name: string
+  }
 }
 
 export default class ArnsService {

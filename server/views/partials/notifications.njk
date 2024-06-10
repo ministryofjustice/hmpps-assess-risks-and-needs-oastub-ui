@@ -1,0 +1,23 @@
+{%- from "moj/components/banner/macro.njk" import mojBanner -%}
+
+{% macro notifications() %}
+    <div id='success-notification-wrapper' class="govuk-!-display-none">
+        {{ mojBanner({
+            id: 'success-notification',
+            type: 'success',
+            text: '',
+            iconFallbackText: 'Success'
+        }) }}
+    </div>
+
+
+    <div id='warning-notification-wrapper' class="govuk-!-display-none">
+        {{ mojBanner({
+            id: 'warning-notification',
+            type: 'warning',
+            class: 'govuk-!-display-none',
+            text: '',
+            iconFallbackText: 'warning'
+        }) }}
+    </div>
+{% endmacro %}

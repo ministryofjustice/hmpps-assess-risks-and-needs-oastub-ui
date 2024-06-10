@@ -5,6 +5,7 @@ import { DateTime } from 'luxon'
 import asyncMiddleware from '../middleware/asyncMiddleware'
 import type { Services } from '../services'
 import fields from './formData'
+import logger from '../../logger'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function routes({ arnsService, handoverService }: Services): Router {
@@ -13,49 +14,97 @@ export default function routes({ arnsService, handoverService }: Services): Rout
   const post = (path: string | string[], handler: RequestHandler) => router.post(path, asyncMiddleware(handler))
 
   get('/', async (req, res, next) => {
-    res.locals.oasysAssessmentPk = randomUUID()
-    res.locals.givenName = faker.person.firstName()
-    res.locals.familyName = faker.person.lastName()
-    res.render('pages/index', { options: { fields } })
+    res.render('pages/index', {
+      options: { fields },
+      fakerData: generateFakerData(),
+    })
   })
+
   post('/', async (req, res, next) => {
-    const {
-      oasysAssessmentPk = randomUUID(),
-      gender = 0,
-      givenName = 'Bruce',
-      familyName = 'Banner',
-      sexuallyMotivatedOffenceHistory = 'NO',
-      app,
-    } = req.body
-    const payload = { oasysAssessmentPk, gender, givenName, familyName, sexuallyMotivatedOffenceHistory }
-    const { sanAssessmentId } = await arnsService.createAssessment({ oasysAssessmentPk })
-    const handoverContext = {
-      principal: {
-        identifier: 'ABC1234567890',
-        displayName: 'Probation User',
-        accessMode: 'READ_WRITE',
-      },
-      subject: {
-        crn: `X${Math.floor(100_000 + Math.random() * 900_000)}`,
-        pnc: `01/${Math.floor(10_000_000 + Math.random() * 90_000_000)}A`,
-        dateOfBirth: faker.date
-          .past({ years: 70, refDate: DateTime.now().minus({ years: 18 }).toISODate() })
-          .toISOString(),
-        givenName,
-        familyName,
-        gender,
-        location: 'COMMUNITY',
-        sexuallyMotivatedOffenceHistory,
-      },
-      assessmentContext: {
-        oasysAssessmentPk,
-        assesmentVersion: sanAssessmentId,
-      },
+    const oasysAssessmentPk = req.body['oasys-assessment-pk']
+    const targetService = req.body['target-service']
+
+    const subjectDetails = {
+      crn: req.body.crn,
+      pnc: req.body.pnc,
+      givenName: req.body['given-name'],
+      familyName: req.body['family-name'],
+      gender: req.body.gender,
+      dateOfBirth: req.body['date-of-birth'],
+      location: req.body.location,
+      sexuallyMotivatedOffenceHistory: req.body['sexually-motivated-offence-history'],
     }
 
-    const link = await handoverService.createHandoverLink(handoverContext, app)
-    res.render('pages/copy-otl', { data: { link, payload: JSON.stringify(payload) } })
+    const user = {
+      identifier: req.body.identifier,
+      displayName: req.body['display-name'],
+      accessMode: req.body['access-mode'],
+    }
+
+    const versions = {
+      assessmentVersion: req.body['assessment-version'],
+      sentencePlanVersion: req.body['assessment-version'],
+    }
+
+    try {
+      await arnsService.createAssessment({
+        oasysAssessmentPk,
+        userDetails: {
+          id: `OAStub - ${user.identifier}`,
+          name: `OAStub - ${user.displayName}`,
+        },
+      })
+    } catch (e) {
+      if (e.status === 409) {
+        logger.info(`Assessment with PK ${oasysAssessmentPk} already exists, continuing`)
+      } else {
+        throw e
+      }
+    }
+
+    const link = await handoverService.createHandoverLink(
+      {
+        user,
+        subjectDetails,
+        oasysAssessmentPk,
+        assessmentVersion: versions.assessmentVersion,
+        // sentencePlanVersion: versions.sentencePlanVersion,
+      },
+      targetService,
+    )
+
+    res.render('pages/copy-otl', {
+      data: { link, targetService: getClientNameFromClientId(targetService) },
+    })
   })
 
   return router
+}
+
+const generateFakerData = () => ({
+  subject: {
+    crn: `X${Math.floor(100_000 + Math.random() * 900_000)}`,
+    pnc: `01/${Math.floor(10_000_000 + Math.random() * 90_000_000)}A`,
+    givenName: faker.person.firstName(),
+    familyName: faker.person.lastName(),
+    gender: faker.helpers.arrayElement([0, 1, 2, 9]),
+    dateOfBirth: DateTime.fromJSDate(
+      faker.date.past({ years: 70, refDate: DateTime.now().minus({ years: 18 }).toISODate() }),
+    ).toFormat('yyyy-MM-dd'),
+    location: faker.helpers.arrayElement(['COMMUNITY', 'PRISON']),
+    sexuallyMotivatedOffenceHistory: faker.helpers.arrayElement(['YES', 'NO']),
+  },
+  user: {
+    identifier: randomUUID(),
+    displayName: faker.person.fullName(),
+    accessMode: 'READ_WRITE',
+  },
+  versions: {
+    oasysAssessmentPk: Math.floor(100_000 + Math.random() * 900_000),
+    assessmentVersion: randomUUID(),
+  },
+})
+
+const getClientNameFromClientId = (clientId: string) => {
+  return fields['target-service'].options.find(option => option.value === clientId).text
 }

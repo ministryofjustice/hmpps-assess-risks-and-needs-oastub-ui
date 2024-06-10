@@ -1,0 +1,130 @@
+{%- from "govuk/components/input/macro.njk" import govukInput -%}
+{%- from "govuk/components/select/macro.njk" import govukSelect -%}
+
+{% macro subjectDetailsTab(options, fakerData) %}
+    {{ govukInput({
+        label: {
+            text: options.fields["oasys-assessment-pk"].text,
+            classes: "govuk-label--m"
+        },
+        classes: "govuk-input--width-5 govuk-input--extra-letter-spacing",
+        id: options.fields["oasys-assessment-pk"].code,
+        name: options.fields["oasys-assessment-pk"].code,
+        hint: options.fields["oasys-assessment-pk"].hint,
+        value: fakerData.versions.oasysAssessmentPk,
+        attributes: {'data-input-group': 'root' }
+    }) }}
+
+    {{ govukInput({
+        label: {
+            text: options.fields["given-name"].text,
+            classes: "govuk-label--m"
+        },
+        classes: "govuk-input--width-20",
+        id: options.fields["given-name"].code,
+        name: options.fields["given-name"].code,
+        hint: options.fields["given-name"].hint,
+        attributes: {'data-input-group': 'subject' },
+        value: fakerData.subject.givenName
+    }) }}
+
+    {{ govukInput({
+        label: {
+            text: options.fields["family-name"].text,
+            classes: "govuk-label--m"
+        },
+        classes: "govuk-input--width-20",
+        id: options.fields["family-name"].code,
+        name: options.fields["family-name"].code,
+        hint: options.fields["family-name"].hint,
+        attributes: {'data-input-group': 'subject' },
+        value: fakerData.subject.familyName
+    }) }}
+
+    {{ govukSelect({
+        label: {
+            text: options.fields["gender"].text,
+            classes: "govuk-label--m"
+        },
+        id: options.fields["gender"].code,
+        name: options.fields["gender"].code,
+        hint: options.fields["gender"].hint,
+        items: options.fields["gender"].options,
+        attributes: {'data-input-group': 'subject' },
+        value: fakerData.subject.gender
+    }) }}
+
+    {{ govukInput({
+        label: {
+            text: options.fields["date-of-birth"].text,
+            classes: "govuk-label--m"
+        },
+        classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+        id: options.fields["date-of-birth"].code,
+        name: options.fields["date-of-birth"].code,
+        attributes: {'data-input-group': 'subject' },
+        spellcheck: false,
+        value: fakerData.subject.dateOfBirth
+    }) }}
+
+    {{ govukSelect({
+        label: {
+            text: options.fields["sexually-motivated-offence-history"].text,
+            classes: "govuk-label--m"
+        },
+        id: options.fields["sexually-motivated-offence-history"].code,
+        name: options.fields["sexually-motivated-offence-history"].code,
+        hint: options.fields["sexually-motivated-offence-history"].hint,
+        items: options.fields["sexually-motivated-offence-history"].options,
+        attributes: {'data-input-group': 'subject' },
+        value: fakerData.subject.sexuallyMotivatedOffenceHistory
+    }) }}
+
+    {{ govukSelect({
+        label: {
+            text: options.fields["location"].text,
+            classes: "govuk-label--m"
+        },
+        id: options.fields["location"].code,
+        name: options.fields["location"].code,
+        hint: options.fields["location"].hint,
+        items: options.fields["location"].options,
+        attributes: {'data-input-group': 'subject' },
+        value: fakerData.subject.location
+    }) }}
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-one-half">
+                    {{ govukInput({
+                        label: {
+                            text: options.fields["crn"].text,
+                            classes: "govuk-label--m"
+                        },
+                        classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+                        id: options.fields["crn"].code,
+                        name: options.fields["crn"].code,
+                        attributes: {'data-input-group': 'subject' },
+                        spellcheck: false,
+                        value: fakerData.subject.crn
+                    }) }}
+                </div>
+                <div class="govuk-grid-column-one-half">
+                    {{ govukInput({
+                        label: {
+                            text: options.fields["pnc"].text,
+                            classes: "govuk-label--m"
+                        },
+                        classes: "govuk-input--width-10 govuk-input--extra-letter-spacing",
+                        id: options.fields["pnc"].code,
+                        name: options.fields["pnc"].code,
+                        attributes: {'data-input-group': 'subject' },
+                        spellcheck: false,
+                        value: fakerData.subject.pnc
+                    }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

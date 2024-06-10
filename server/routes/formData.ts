@@ -1,13 +1,64 @@
 import config from '../config'
 
 export default {
-  'oastub-assessment-uuid': {
-    code: 'oasysAssessmentPk',
-    text: 'Assessment ID',
+  // Versions, PKs
+  'assessment-version': {
+    code: 'assessment-version',
+    text: 'Assessment Version',
     hint: {
-      text: 'These are randomly generated for the purpose of stubbing out. In order to return to an assessment take note of the initial assessment ID and use it again here instead of the default random ID',
+      text: 'Use this to access a specific assessment version',
       kind: 'text',
     },
+  },
+  'sentence-plan-version': {
+    code: 'sentence-plan-version',
+    text: 'Sentence Plan Version',
+    hint: {
+      text: 'Use this to access a specific sentence plan version',
+      kind: 'text',
+    },
+  },
+
+  // Practitioner Details
+  identifier: {
+    code: 'identifier',
+    text: 'Identifier',
+  },
+  'display-name': {
+    code: 'display-name',
+    text: 'Display name (full name)',
+  },
+  'access-mode': {
+    code: 'access-mode',
+    text: 'Access mode',
+    hint: {
+      text: 'Limit editing capabilities to simulate counter-signing lock',
+      kind: 'text',
+    },
+    options: [
+      { text: 'View only', value: 'READ', kind: 'option' },
+      { text: 'View and edit', value: 'READ_WRITE', kind: 'option' },
+    ],
+  },
+
+  // Subject Details
+  'oasys-assessment-pk': {
+    code: 'oasys-assessment-pk',
+    text: 'OASys Assessment PK',
+    hint: {
+      text:
+        'In order to return to an assessment take note of the initial OASys Assessment PK ' +
+        'and use it again here instead of the default random ID',
+      kind: 'text',
+    },
+  },
+  crn: {
+    code: 'crn',
+    text: 'CRN',
+  },
+  pnc: {
+    code: 'pnc',
+    text: 'PNC',
   },
   'given-name': {
     code: 'given-name',
@@ -31,9 +82,21 @@ export default {
       { text: 'Female', value: '2', kind: 'option' },
     ],
   },
+  'date-of-birth': {
+    code: 'date-of-birth',
+    text: 'Date of birth',
+  },
+  location: {
+    code: 'location',
+    text: 'Location',
+    options: [
+      { text: 'Community', value: 'COMMUNITY', kind: 'option' },
+      { text: 'Prison', value: 'PRISON', kind: 'option' },
+    ],
+  },
   'sexually-motivated-offence-history': {
     code: 'sexually-motivated-offence-history',
-    text: 'Do they have a sexually motivated offence history?',
+    text: 'Sexually motivated offence history',
     hint: {
       text: 'Questions in the assessment are conditional on whether the subject has a sexually motivated offence history',
       kind: 'text',
@@ -43,12 +106,15 @@ export default {
       { text: 'Yes', value: 'YES', kind: 'option' },
     ],
   },
-  sanClient: {
-    clientId: config.apis.handoverApi.sanClientId,
-    text: 'SAN',
-  },
-  spClient: {
-    clientId: config.apis.handoverApi.spClientId,
-    text: 'Sentence plan',
+
+  // Client Redirect Details
+  'target-service': {
+    code: 'target-service',
+    text: 'Target service',
+    options: [
+      { text: 'Strengths and Needs Assessment', value: config.apis.handoverApi.sanClientId, kind: 'option' },
+      { text: 'Sentence Plan', value: config.apis.handoverApi.spClientId, kind: 'option' },
+      { text: 'localhost (Developer Environment)', value: 'localhost', kind: 'option' },
+    ],
   },
 }

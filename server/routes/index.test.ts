@@ -21,11 +21,7 @@ describe('GET /', () => {
       .get('/')
       .expect('Content-Type', /html/)
       .expect(res => {
-        expect(res.text).toContain('Given name')
-        expect(res.text).toContain('Family name')
-        expect(res.text).toContain('Gender')
-        expect(res.text).toContain('Assessment ID')
-        expect(res.text).toContain('Project')
+        expect(res.text).toContain('Generate and customize handover')
       })
   })
 })

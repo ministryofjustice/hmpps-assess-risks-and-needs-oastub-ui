@@ -5,6 +5,12 @@
 {%- from "moj/components/banner/macro.njk" import mojBanner -%}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "../partials/notifications.njk" import notifications %}
+{% from "../partials/tabs/subject-details-tab.njk" import subjectDetailsTab %}
+{% from "../partials/tabs/practioner-details-tab.njk" import practionerDetailsTab %}
+{% from "../partials/tabs/versions-tab.njk" import versionsTab %}
 
 {% set hideBackLink = true %}
 
@@ -13,96 +19,83 @@
 {% endblock %}
 
 {% block content %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-three-quarters">
-      <h1 class="govuk-heading-l">{{ options.pageTitle }}</h1>
-      <form id="form" method="post" action="{{ action }}">
- 
-        {{ govukInput({
-          label: {
-            text: options.fields["given-name"].text,
-            classes: "govuk-label--m"
-          },
-          id: options.fields["given-name"].code,
-          name: options.fields["given-name"].code,
-          hint: options.fields["given-name"].hint,
-          value: givenName
-        }) }}
+  {{ notifications() }}
 
-        {{ govukInput({
-          label: {
-            text: options.fields["family-name"].text,
-            classes: "govuk-label--m"
-          },
-          id: options.fields["family-name"].code,
-          name: options.fields["family-name"].code,
-          hint: options.fields["family-name"].hint,
-          value:familyName
-        }) }}
-
-        {{ govukSelect({
-          label: {
-            text: options.fields["gender"].text,
-            classes: "govuk-label--m"
-          },
-          id: options.fields["gender"].code,
-          name: options.fields["gender"].code,
-          hint: options.fields["gender"].hint,
-          items: options.fields["gender"].options
-        }) }}
-
-        {{ govukSelect({
-          label: {
-            text: options.fields["sexually-motivated-offence-history"].text,
-            classes: "govuk-label--m"
-          },
-          id: options.fields["sexually-motivated-offence-history"].code,
-          name: options.fields["sexually-motivated-offence-history"].code,
-          hint: options.fields["sexually-motivated-offence-history"].hint,
-          items: options.fields["sexually-motivated-offence-history"].options
-        }) }}
-
-        {{ govukInput({
-          label: {
-            text: options.fields["oastub-assessment-uuid"].text,
-            classes: "govuk-label--m"
-          },
-          id: options.fields["oastub-assessment-uuid"].code,
-          name: options.fields["oastub-assessment-uuid"].code,
-          hint: options.fields["oastub-assessment-uuid"].hint,
-          value: oasysAssessmentPk
-        }) }}
-        {{ govukRadios({
-          name: "app",
-          fieldset: {
-            legend: {
-              text: "Project",
-              isPageHeading: true,
-              classes: "govuk-fieldset__legend--m"
-            }
-          },
-          items: [
-            {
-              value: options.fields.sanClient.clientId,
-              text: options.fields.sanClient.text,
-              checked:'true'
-            },
-            {
-              value:options.fields.spClient.clientId,
-              text: options.fields.spClient.text
-            }
-          ]
-        }) }}
-
-        <div class="questiongroup-action-buttons">
-          {{ govukButton({
-              text: buttonText | default('Create one time link'),
-              classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+  <form id="form" method="post" action="{{ action }}">
+    <h1 class="govuk-heading-l">
+      Generate and customize handover
+    </h1>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        <label class="govuk-label govuk-label--s" for="target-service">
+          {{ options.fields["target-service"].text }}
+        </label>
+        <div>
+          <div class="govuk-!-display-inline-block">
+            {{ govukSelect({
+              id: options.fields["target-service"].code,
+              name: options.fields["target-service"].code,
+              hint: options.fields["target-service"].hint,
+              items: options.fields["target-service"].options
             }) }}
-        </div>
-      </form>
-    </div>
-  </div>
-{% endblock %}
+          </div>
+          {{ govukButton({
+            text: 'Create handover link',
+            classes: "govuk-!-display-inline govuk-!-margin-left-4"
+          }) }}
 
-{% block bodyEnd %}{% endblock %}
+          {{ govukButton({
+            id: "copy-configuration-btn",
+            text: 'Copy configuration',
+            classes: "govuk-button--secondary govuk-!-display-inline govuk-!-margin-left-4",
+            type: 'button'
+          }) }}
+
+          {{ govukButton({
+            id: "paste-configuration-btn",
+            text: 'Paste configuration',
+            classes: "govuk-button--secondary govuk-!-display-inline govuk-!-margin-left-4",
+            type: 'button'
+          }) }}
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters">
+        {{ govukDetails({
+          summaryText: "What is this?",
+          text: "Use the below sections to customise the handover session.
+          This allows you to specify details about the subject, practioner or version information.
+          When ready, click 'Create handover link' to generate your unique, one-time link."
+        }) }}
+
+        {{ govukTabs({
+        items: [
+          {
+            label: "Subject Details",
+            id: "subject-details",
+            panel: {
+              html: subjectDetailsTab(options, fakerData)
+            }
+          },
+          {
+            label: "Practioner Details",
+            id: "practioner-details",
+            panel: {
+                html: practionerDetailsTab(options, fakerData)
+            }
+          },
+          {
+            label: "Versions",
+            id: "versions",
+            panel: {
+              html: versionsTab(options, fakerData)
+            }
+          }
+        ]
+        }) }}
+      </div>
+    </div>
+  </form>
+{% endblock %}
