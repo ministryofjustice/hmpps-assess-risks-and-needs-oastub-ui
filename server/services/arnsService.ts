@@ -10,7 +10,11 @@ export interface CreateAssessmentResponse {
   sentencePlanVersion?: number
 }
 export interface CreateAssessmentRequest extends Record<string, unknown> {
-  oasysAssessmentPk: string
+  oasysAssessmentPk: string,
+  userDetails: {
+    id: string
+    name: string
+  }
 }
 
 export default class ArnsService {

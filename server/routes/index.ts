@@ -45,7 +45,22 @@ export default function routes({ arnsService, handoverService }: Services): Rout
       sentencePlanVersion: req.body['assessment-version'],
     }
 
-    await arnsService.createAssessment({ oasysAssessmentPk })
+    try {
+      await arnsService.createAssessment({
+        oasysAssessmentPk,
+        userDetails: {
+          id: `OAStub - ${user.identifier}`,
+          name: `OAStub - ${user.displayName}`,
+        },
+      })
+    } catch (e) {
+      if (e.status === 409) {
+        console.log(`Assessment with PK ${oasysAssessmentPk} already exists, continuing`)
+      } else {
+        throw e
+      }
+    }
+
     const link = await handoverService.createHandoverLink(
       {
         user,
