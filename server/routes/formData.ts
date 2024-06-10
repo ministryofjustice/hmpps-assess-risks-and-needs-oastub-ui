@@ -114,6 +114,7 @@ export default {
     options: [
       { text: 'Strengths and Needs Assessment', value: config.apis.handoverApi.sanClientId, kind: 'option' },
       { text: 'Sentence Plan', value: config.apis.handoverApi.spClientId, kind: 'option' },
+      { text: 'localhost (Developer Environment)', value: 'localhost', kind: 'option' },
     ],
   },
 }

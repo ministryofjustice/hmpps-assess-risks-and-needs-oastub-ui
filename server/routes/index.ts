@@ -5,6 +5,7 @@ import { DateTime } from 'luxon'
 import asyncMiddleware from '../middleware/asyncMiddleware'
 import type { Services } from '../services'
 import fields from './formData'
+import logger from '../../logger'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function routes({ arnsService, handoverService }: Services): Router {
@@ -55,7 +56,7 @@ export default function routes({ arnsService, handoverService }: Services): Rout
       })
     } catch (e) {
       if (e.status === 409) {
-        console.log(`Assessment with PK ${oasysAssessmentPk} already exists, continuing`)
+        logger.info(`Assessment with PK ${oasysAssessmentPk} already exists, continuing`)
       } else {
         throw e
       }
