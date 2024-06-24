@@ -6,6 +6,7 @@ import asyncMiddleware from '../middleware/asyncMiddleware'
 import type { Services } from '../services'
 import fields from './formData'
 import logger from '../../logger'
+import config from '../config'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function routes({ arnsService, handoverService }: Services): Router {
@@ -46,19 +47,21 @@ export default function routes({ arnsService, handoverService }: Services): Rout
       sentencePlanVersion: req.body['assessment-version'],
     }
 
-    try {
-      await arnsService.createAssessment({
-        oasysAssessmentPk,
-        userDetails: {
-          id: `OAStub - ${user.identifier}`,
-          name: `OAStub - ${user.displayName}`,
-        },
-      })
-    } catch (e) {
-      if (e.status === 409) {
-        logger.info(`Assessment with PK ${oasysAssessmentPk} already exists, continuing`)
-      } else {
-        throw e
+    if (targetService === config.apis.handoverApi.sanClientId) {
+      try {
+        await arnsService.createAssessment({
+          oasysAssessmentPk,
+          userDetails: {
+            id: `OAStub - ${user.identifier}`,
+            name: `OAStub - ${user.displayName}`,
+          },
+        })
+      } catch (e) {
+        if (e.status === 409) {
+          logger.info(`Assessment with PK ${oasysAssessmentPk} already exists, continuing`)
+        } else {
+          throw e
+        }
       }
     }
 
