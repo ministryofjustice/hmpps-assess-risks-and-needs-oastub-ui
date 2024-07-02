@@ -16,6 +16,6 @@ export default class SentencePlanService {
 
   async createPlan(requestBody: CreateSentencePlanRequest) {
     const client = await this.restClient()
-    return client.post({ path: '/plans', data: requestBody })
+    return client.post({ path: '/oasys/plans', data: requestBody })
   }
 }
