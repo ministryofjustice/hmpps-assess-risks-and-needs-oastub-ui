@@ -9,7 +9,7 @@ import logger from '../../logger'
 import config from '../config'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function routes({ arnsService, handoverService }: Services): Router {
+export default function routes({ arnsService, sentencePlanService, handoverService }: Services): Router {
   const router = Router()
   const get = (path: string | string[], handler: RequestHandler) => router.get(path, asyncMiddleware(handler))
   const post = (path: string | string[], handler: RequestHandler) => router.post(path, asyncMiddleware(handler))
@@ -44,7 +44,7 @@ export default function routes({ arnsService, handoverService }: Services): Rout
 
     const versions = {
       assessmentVersion: req.body['assessment-version'],
-      sentencePlanVersion: req.body['assessment-version'],
+      planVersion: req.body['sentence-plan-version'],
     }
 
     if (targetService === config.apis.handoverApi.sanClientId) {
@@ -65,13 +65,25 @@ export default function routes({ arnsService, handoverService }: Services): Rout
       }
     }
 
+    if (targetService === config.apis.handoverApi.spClientId) {
+      try {
+        await sentencePlanService.createPlan({ oasysAssessmentPk })
+      } catch (e) {
+        if (e.status === 409) {
+          logger.info(`Plan with PK ${oasysAssessmentPk} already exists, continuing`)
+        } else {
+          throw e
+        }
+      }
+    }
+
     const link = await handoverService.createHandoverLink(
       {
         user,
         subjectDetails,
         oasysAssessmentPk,
         assessmentVersion: versions.assessmentVersion,
-        // sentencePlanVersion: versions.sentencePlanVersion,
+        planVersion: versions.planVersion,
       },
       targetService,
     )
