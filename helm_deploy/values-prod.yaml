@@ -11,6 +11,7 @@ generic-service:
     TOKEN_VERIFICATION_API_URL: "https://token-verification-api.prison.service.justice.gov.uk"
     HMPPS_ARNS_HANDOVER_URL: "https://arns-handover-service.hmpps.service.justice.gov.uk"
     SBNA_API_URL: "https://api.strengths-based-needs.hmpps.service.justice.gov.uk"
+    SP_API_URL: "https://sentence-plan-api-preprod.hmpps.service.justice.gov.uk"
     AUDIT_ENABLED: "false"
 
 generic-prometheus-alerts:
