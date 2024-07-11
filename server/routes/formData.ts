@@ -36,7 +36,7 @@ export default {
       kind: 'text',
     },
     options: [
-      { text: 'View only', value: 'READ', kind: 'option' },
+      { text: 'View only', value: 'READ_ONLY', kind: 'option' },
       { text: 'View and edit', value: 'READ_WRITE', kind: 'option' },
     ],
   },
