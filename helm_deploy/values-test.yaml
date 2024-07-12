@@ -1,0 +1,38 @@
+---
+# Per environment values which override defaults in hmpps-assess-risks-and-needs-oastub-ui/values.yaml
+
+generic-service:
+  replicaCount: 2
+
+  ingress:
+    host: arns-oastub-test.hmpps.service.justice.gov.uk
+
+  env:
+    INGRESS_URL: "https://arns-oastub-test.hmpps.service.justice.gov.uk"
+    HMPPS_AUTH_URL: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth"
+    TOKEN_VERIFICATION_API_URL: "https://token-verification-api-dev.prison.service.justice.gov.uk"
+    HMPPS_ARNS_HANDOVER_URL: "https://arns-handover-service-test.hmpps.service.justice.gov.uk"
+    SBNA_API_URL: "https://api.strengths-based-needs-test.hmpps.service.justice.gov.uk"
+    SP_API_URL: "https://sentence-plan-api-test.hmpps.service.justice.gov.uk"
+    ENVIRONMENT_NAME: TEST
+    AUDIT_ENABLED: "false"
+
+  allowlist:
+    capita-dev: 51.104.16.30/31
+    captia-further: 172.167.141.40/32
+    neil-test: 51.155.102.238/32
+    capita-developers-vms-one: 85.115.52.180/32
+    capita-developers-vms-two: 85.115.52.200/29
+    capita-developers-vms-three: 85.115.53.180/32
+    capita-developers-vms-four: 85.115.53.200/29
+    capita-developers-vms-five: 85.115.54.180/32
+    capita-developers-vms-six: 85.115.54.200/29
+    moj-appsec-test-ip: 80.195.27.199/32
+    
+    groups:
+      - circleci
+      - internal
+      - prisons
+
+generic-prometheus-alerts:
+  alertSeverity: 
