@@ -21,6 +21,8 @@ services:
         BUILD_NUMBER: "1.0.0"
         GIT_REF: "a1b2c3"
         GIT_BRANCH: main
+    healthcheck:
+      test: [ "CMD", "node", "/app/docker/healthcheck.js" ]
     networks:
       - hmpps
     ports:
