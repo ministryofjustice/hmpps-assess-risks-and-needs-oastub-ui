@@ -115,6 +115,8 @@ jobs:
 workflows:
   version: 2
   build-test-and-deploy:
+    when:
+      not: << pipeline.parameters.deploy >>
     jobs:
       - build:
           filters:
