@@ -10,7 +10,7 @@ export default class SentencePlanService {
   constructor(private readonly authClient: HmppsAuthClient) {}
 
   private async restClient(): Promise<RestClient> {
-    const token = await this.authClient.getSystemClientToken()
+    const token = await this.authClient.getSystemClientToken('SYSTEM|OAStub')
     return new RestClient('Sentence Plan Api Client', config.apis.spApi, token)
   }
 
