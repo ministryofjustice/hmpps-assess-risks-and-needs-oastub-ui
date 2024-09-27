@@ -46,12 +46,9 @@ generic-service:
       SYSTEM_CLIENT_ID: "SYSTEM_CLIENT_ID"
       SYSTEM_CLIENT_SECRET: "SYSTEM_CLIENT_SECRET"
       SESSION_SECRET: "SESSION_SECRET"
-    hmpps-assess-risks-and-needs-handover-service-elasticache-redis:
+    hmpps-assess-risks-and-needs-integrations-elasticache-redis:
       REDIS_HOST: "primary_endpoint_address"
       REDIS_AUTH_TOKEN: "auth_token"
-    #sqs-hmpps-audit-secret:
-    #  AUDIT_SQS_QUEUE_URL: "sqs_queue_url"
-    #  AUDIT_SQS_QUEUE_NAME: "sqs_queue_name"
 
   allowlist:
     groups:
