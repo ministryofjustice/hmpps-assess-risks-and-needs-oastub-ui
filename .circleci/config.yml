@@ -204,7 +204,7 @@ workflows:
           pipeline_number: << pipeline.number >>
           context:
             - hmpps-common-vars
-            - hmpps-assess-risks-and-needs-handover-service-test
+            - hmpps-assess-risks-and-needs-integrations-test
       - hmpps/publish_docker:
           name: publish_docker
           publish_latest_tag: false
@@ -220,7 +220,7 @@ workflows:
           pipeline_number: << pipeline.number >>
           context:
             - hmpps-common-vars
-            - hmpps-assess-risks-and-needs-handover-service-test
+            - hmpps-assess-risks-and-needs-integrations-test
           requires:
             - publish_docker
           helm_timeout: 5m
