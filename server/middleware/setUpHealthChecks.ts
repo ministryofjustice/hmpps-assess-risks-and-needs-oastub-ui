@@ -31,7 +31,6 @@ export default function setUpHealthChecks(applicationInfo: ApplicationInfo): Rou
         version: applicationInfo.buildNumber,
         name: applicationInfo.applicationName,
       },
-      productId: applicationInfo.productId,
     })
   })
 
