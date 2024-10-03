@@ -108,7 +108,7 @@ services:
     environment:
       REDIS_ENABLED: "true"
       SYSTEM_CLIENT_SECRET: clientsecret
-      SYSTEM_CLIENT_ID: hmpps-strengths-and-needs-ui-client
+      SYSTEM_CLIENT_ID: hmpps-assess-risks-and-needs-oastub-ui
       SESSION_SECRET: sessionsecret
       REDIS_HOST: redis
       INGRESS_URL: http://localhost:7072
