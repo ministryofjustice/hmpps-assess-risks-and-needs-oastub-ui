@@ -48,6 +48,9 @@ services:
       OASYS_BASE_URL: http://localhost:7072
       SERVER_ERROR_WHITELABEL_ENABLED: true
       LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY: DEBUG
+      COORDINATOR_API_BASE_URL: http://coordinator-api:8080
+      CLIENT_ID: hmpps-assess-risks-and-needs-oastub-ui
+      CLIENT_SECRET: clientsecret
 
   coordinator-api:
     image: quay.io/hmpps/hmpps-assess-risks-and-needs-coordinator-api:latest
@@ -56,6 +59,7 @@ services:
     depends_on:
       - postgres
       - hmpps-auth
+      - san-api
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://coordinator-api:8080/health/ping" ]
       interval: 5s
@@ -72,6 +76,7 @@ services:
       SP_API_BASE_URL: http://sp-api:8080
       CLIENT_ID: hmpps-assess-risks-and-needs-oastub-ui
       CLIENT_SECRET: clientsecret
+      APP_STRATEGIES_PLAN: false
 
   san-api:
     image: quay.io/hmpps/hmpps-strengths-based-needs-assessments-api:latest
@@ -130,7 +135,6 @@ services:
       - hmpps-auth
       - arns-handover
       - oasys-ui
-      - coordinator-api
     healthcheck:
       test: [ "CMD", "node", "./docker/healthcheck.js" ]
       interval: 5s
