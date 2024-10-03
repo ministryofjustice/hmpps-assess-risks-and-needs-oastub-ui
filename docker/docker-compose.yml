@@ -1,0 +1,164 @@
+services:
+  redis:
+    image: redis:7.4
+    networks:
+      - hmpps
+    environment:
+      ALLOW_EMPTY_PASSWORD: yes
+
+  postgres:
+    image: postgres:16
+    networks:
+      - hmpps
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: dev
+    tmpfs:
+      - /var/lib/postgresql
+
+  hmpps-auth:
+    image: quay.io/hmpps/hmpps-auth:latest
+    networks:
+      - hmpps
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://hmpps-auth:9090/auth/health"]
+      interval: 5s
+      retries: 60
+    environment:
+      SERVER_PORT: 9090
+      SPRING_PROFILES_ACTIVE: dev
+      APPLICATION_AUTHENTICATION_UI_ALLOWLIST: 0.0.0.0/0
+      LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY: DEBUG
+
+  arns-handover:
+    image: quay.io/hmpps/hmpps-assess-risks-and-needs-handover-service:latest
+    networks:
+      - hmpps
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://arns-handover:7070/health/ping"]
+    environment:
+      SERVER_PORT: 7070
+      REDIS_HOST: redis
+      SPRING_PROFILES_ACTIVE: local
+      HMPPS_HANDOVER_BASE_URL: http://arns-handover:7070
+      HMPPS_HANDOVER_EXTERNAL_URL: http://localhost:7070
+      HMPPS_AUTH_BASE_URL: http://hmpps-auth:9090
+      OASYS_BASE_URL: http://localhost:7072
+      SERVER_ERROR_WHITELABEL_ENABLED: true
+      LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY: DEBUG
+
+  coordinator-api:
+    image: quay.io/hmpps/hmpps-assess-risks-and-needs-coordinator-api:latest
+    networks:
+      - hmpps
+    depends_on:
+      - postgres
+      - hmpps-auth
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://coordinator-api:8080/health/ping" ]
+      interval: 5s
+      retries: 60
+    environment:
+      SERVER_PORT: 8080
+      SPRING_PROFILES_ACTIVE: postgres
+      APP_DB_ENDPOINT: postgres:5432
+      APP_DB_NAME: postgres
+      APP_DB_USERNAME: root
+      APP_DB_PASSWORD: dev
+      HMPPS_AUTH_BASE_URL: http://hmpps-auth:9090/auth
+      SAN_API_BASE_URL: http://san-api:8080
+      # TODO: Need to get some proper credentials for below
+      SAN_API_CLIENT_ID: hmpps-strengths-and-needs-ui-client
+      SAN_API_CLIENT_SECRET: clientsecret
+      SP_API_BASE_URL: http://sp-api:8080
+      SP_API_CLIENT_ID: hmpps-strengths-and-needs-ui-client
+      SP_API_CLIENT_SECRET: clientsecret
+
+  san-api:
+    image: quay.io/hmpps/hmpps-strengths-based-needs-assessments-api:latest
+    networks:
+      - hmpps
+    depends_on:
+     - postgres
+     - hmpps-auth
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://san-api:8080/health/ping"]
+      interval: 5s
+      retries: 60
+    environment:
+      SERVER_PORT: 8080
+      SPRING_PROFILES_ACTIVE: postgres
+      DATABASE_ENDPOINT: postgres:5432
+      OAUTH_ENDPOINT_URL: http://hmpps-auth:9090/auth
+      FORM_CONFIG_BASE_URL: http://san-ui:3000/config
+
+  oasys-ui:
+    image: quay.io/hmpps/hmpps-assess-risks-and-needs-oastub-ui:${APP_VERSION:-latest}
+    build:
+      context: ../
+      target: production
+    networks:
+      - hmpps
+    depends_on:
+      - redis
+      - hmpps-auth
+    healthcheck:
+      test: [ "CMD", "node", "./docker/healthcheck.js" ]
+      interval: 5s
+      retries: 60
+    environment:
+      REDIS_ENABLED: "true"
+      SYSTEM_CLIENT_SECRET: clientsecret
+      SYSTEM_CLIENT_ID: hmpps-strengths-and-needs-ui-client
+      SESSION_SECRET: sessionsecret
+      REDIS_HOST: redis
+      INGRESS_URL: http://localhost:7072
+      HMPPS_AUTH_URL: http://hmpps-auth:9090/auth
+      TOKEN_VERIFICATION_ENABLED: "false"
+      TOKEN_VERIFICATION_API_URL: http://hmpps-auth:9091/verification
+      HMPPS_ARNS_HANDOVER_URL: http://arns-handover:7070
+      SBNA_API_URL: "http://san-api:8080"
+      SP_API_URL: "http://sp-api:8080"
+      ENVIRONMENT_NAME: DEV
+      AUDIT_ENABLED: "false"
+      PRODUCT_ID: FOO
+
+  san-ui:
+    image: quay.io/hmpps/hmpps-strengths-based-needs-assessments-ui:latest
+    networks:
+      - hmpps
+    depends_on:
+      - redis
+      - hmpps-auth
+      - arns-handover
+      - oasys-ui
+      - coordinator-api
+    healthcheck:
+      test: [ "CMD", "node", "./docker/healthcheck.js" ]
+      interval: 5s
+      retries: 60
+    environment:
+      PORT: 3000
+      REDIS_HOST: redis
+      HMPPS_AUTH_EXTERNAL_URL: http://localhost:9090/auth
+      HMPPS_AUTH_URL: http://hmpps-auth:9090/auth
+      HMPPS_ARNS_HANDOVER_URL: http://arns-handover:7070
+      HMPPS_ARNS_HANDOVER_EXTERNAL_URL: http://localhost:7070
+      OASYS_URL: http://localhost:7072
+      HANDOVER_CLIENT_ID: strengths-and-needs-assessment
+      HANDOVER_CLIENT_SECRET: san-secret
+      TOKEN_VERIFICATION_ENABLED: false
+      TOKEN_VERIFICATION_API_URL: http://hmpps-auth:9091/verification
+      API_CLIENT_SECRET: clientsecret
+      SYSTEM_CLIENT_SECRET: clientsecret
+      API_CLIENT_ID: hmpps-strengths-and-needs-ui
+      SYSTEM_CLIENT_ID: hmpps-strengths-and-needs-ui-client
+      SESSION_SECRET: sessionsecret
+      SBNA_API_URL: http://san-api:8080
+      INGRESS_URL: http://localhost:3000
+      HTTPS: false
+
+networks:
+  hmpps:

@@ -1,0 +1,16 @@
+services:
+  coordinator-api:
+    ports:
+      - "8070:8080"
+
+  san-ui:
+    ports:
+      - "3000:3000"
+
+  arns-handover:
+    ports:
+      - "7070:7070"
+
+  oasys-ui:
+    ports:
+      - "7072:3000"
