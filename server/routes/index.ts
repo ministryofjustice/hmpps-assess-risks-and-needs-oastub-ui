@@ -6,10 +6,9 @@ import asyncMiddleware from '../middleware/asyncMiddleware'
 import type { Services } from '../services'
 import fields from './formData'
 import logger from '../../logger'
-import config from '../config'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function routes({ arnsService, sentencePlanService, handoverService }: Services): Router {
+export default function routes({ coordinatorService, handoverService }: Services): Router {
   const router = Router()
   const get = (path: string | string[], handler: RequestHandler) => router.get(path, asyncMiddleware(handler))
   const post = (path: string | string[], handler: RequestHandler) => router.post(path, asyncMiddleware(handler))
@@ -47,33 +46,20 @@ export default function routes({ arnsService, sentencePlanService, handoverServi
       planVersion: req.body['sentence-plan-version'],
     }
 
-    if (targetService === config.apis.handoverApi.sanClientId) {
-      try {
-        await arnsService.createAssessment({
-          oasysAssessmentPk,
-          userDetails: {
-            id: `OAStub - ${user.identifier}`,
-            name: `OAStub - ${user.displayName}`,
-          },
-        })
-      } catch (e) {
-        if (e.status === 409) {
-          logger.info(`Assessment with PK ${oasysAssessmentPk} already exists, continuing`)
-        } else {
-          throw e
-        }
-      }
-    }
-
-    if (targetService === config.apis.handoverApi.spClientId) {
-      try {
-        await sentencePlanService.createPlan({ oasysAssessmentPk })
-      } catch (e) {
-        if (e.status === 409) {
-          logger.info(`Plan with PK ${oasysAssessmentPk} already exists, continuing`)
-        } else {
-          throw e
-        }
+    try {
+      await coordinatorService.create({
+        oasysAssessmentPk,
+        planType: 'INITIAL',
+        userDetails: {
+          id: `OAStub - ${user.identifier}`,
+          name: `OAStub - ${user.displayName}`,
+        },
+      })
+    } catch (e) {
+      if (e.status === 409) {
+        logger.info(`Association with PK ${oasysAssessmentPk} already exists, continuing`)
+      } else {
+        throw e
       }
     }
 
