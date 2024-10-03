@@ -17,7 +17,7 @@ services:
       - /var/lib/postgresql
 
   hmpps-auth:
-    image: quay.io/hmpps/hmpps-auth:latest
+    image: quay.io/hmpps/hmpps-auth:2024-10-02.25761.db2ce3c
     networks:
       - hmpps
     healthcheck:
@@ -69,12 +69,9 @@ services:
       APP_DB_PASSWORD: dev
       HMPPS_AUTH_BASE_URL: http://hmpps-auth:9090/auth
       SAN_API_BASE_URL: http://san-api:8080
-      # TODO: Need to get some proper credentials for below
-      SAN_API_CLIENT_ID: hmpps-strengths-and-needs-ui-client
-      SAN_API_CLIENT_SECRET: clientsecret
       SP_API_BASE_URL: http://sp-api:8080
-      SP_API_CLIENT_ID: hmpps-strengths-and-needs-ui-client
-      SP_API_CLIENT_SECRET: clientsecret
+      CLIENT_ID: hmpps-assess-risks-and-needs-oastub-ui
+      CLIENT_SECRET: clientsecret
 
   san-api:
     image: quay.io/hmpps/hmpps-strengths-based-needs-assessments-api:latest
@@ -119,8 +116,7 @@ services:
       TOKEN_VERIFICATION_ENABLED: "false"
       TOKEN_VERIFICATION_API_URL: http://hmpps-auth:9091/verification
       HMPPS_ARNS_HANDOVER_URL: http://arns-handover:7070
-      SBNA_API_URL: "http://san-api:8080"
-      SP_API_URL: "http://sp-api:8080"
+      COORDINATOR_API_URL: "http://coordinator-api:8080"
       ENVIRONMENT_NAME: DEV
       AUDIT_ENABLED: "false"
       PRODUCT_ID: FOO

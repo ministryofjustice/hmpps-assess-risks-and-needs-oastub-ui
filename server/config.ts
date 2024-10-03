@@ -84,21 +84,13 @@ export default {
       agent: new AgentConfig(Number(get('TOKEN_VERIFICATION_API_TIMEOUT_RESPONSE', 5000))),
       enabled: get('TOKEN_VERIFICATION_ENABLED', 'false') === 'true',
     },
-    arnsApi: {
-      url: get('SBNA_API_URL', 'http://localhost:8080', requiredInProduction),
+    coordinatorApi: {
+      url: get('COORDINATOR_API_URL', 'http://localhost:8070', requiredInProduction),
       timeout: {
-        response: Number(get('SBNA_API_TIMEOUT_RESPONSE', 10000)),
-        deadline: Number(get('SBNA_API_TIMEOUT_DEADLINE', 10000)),
+        response: Number(get('COORDINATOR_API_TIMEOUT_RESPONSE', 10000)),
+        deadline: Number(get('COORDINATOR_API_TIMEOUT_DEADLINE', 10000)),
       },
-      agent: new AgentConfig(Number(get('SBNA_API_TIMEOUT_RESPONSE', 10000))),
-    },
-    spApi: {
-      url: get('SP_API_URL', 'http://localhost:8080', requiredInProduction),
-      timeout: {
-        response: Number(get('SP_API_TIMEOUT_RESPONSE', 10000)),
-        deadline: Number(get('SP_API_TIMEOUT_DEADLINE', 10000)),
-      },
-      agent: new AgentConfig(Number(get('SP_API_TIMEOUT_RESPONSE', 10000))),
+      agent: new AgentConfig(Number(get('COORDINATOR_API_TIMEOUT_RESPONSE', 10000))),
     },
     handoverApi: {
       url: get('HMPPS_ARNS_HANDOVER_URL', 'http://localhost:7070/oauth2/authorize', requiredInProduction),
