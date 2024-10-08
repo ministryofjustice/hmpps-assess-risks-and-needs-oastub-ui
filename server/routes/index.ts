@@ -6,6 +6,7 @@ import asyncMiddleware from '../middleware/asyncMiddleware'
 import type { Services } from '../services'
 import fields from './formData'
 import logger from '../../logger'
+import config from '../config'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function routes({ coordinatorService, handoverService }: Services): Router {
@@ -99,6 +100,7 @@ const generateFakerData = () => ({
     identifier: randomUUID(),
     displayName: faker.person.fullName(),
     accessMode: 'READ_WRITE',
+    returnUrl: config.domain,
   },
   versions: {
     oasysAssessmentPk: Math.floor(100_000 + Math.random() * 900_000),
