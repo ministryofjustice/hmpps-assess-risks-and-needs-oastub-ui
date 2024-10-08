@@ -40,6 +40,7 @@ export default function routes({ coordinatorService, handoverService }: Services
       identifier: req.body.identifier,
       displayName: req.body['display-name'],
       accessMode: req.body['access-mode'],
+      returnUrl: config.domain,
     }
 
     const versions = {
