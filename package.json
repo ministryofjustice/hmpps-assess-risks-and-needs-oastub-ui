@@ -92,7 +92,7 @@
     "@faker-js/faker": "^9.0.3",
     "@ministryofjustice/frontend": "^2.2.4",
     "agentkeepalive": "^4.5.0",
-    "applicationinsights": "^2.9.6",
+    "applicationinsights": "^3.3.0",
     "body-parser": "^1.20.3",
     "bunyan": "^1.8.15",
     "bunyan-format": "^0.2.1",
