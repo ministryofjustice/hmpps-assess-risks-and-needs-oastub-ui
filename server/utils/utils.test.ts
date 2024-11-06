@@ -1,4 +1,4 @@
-import { convertToTitleCase, initialiseName } from './utils'
+import { camelToTitleCase, convertToTitleCase, initialiseName, renderCriminogenicNeeds } from './utils'
 
 describe('convert to title case', () => {
   it.each([
@@ -16,6 +16,16 @@ describe('convert to title case', () => {
   })
 })
 
+describe('convert from camel to title case', () => {
+  it.each([
+    [null, null, ''],
+    ['empty string', '', ''],
+    ['Lower case', 'thisIsACamelCaseString', 'This Is A Camel Case String'],
+  ])('%s camelToTitleCase(%s, %s)', (_: string, a: string, expected: string) => {
+    expect(camelToTitleCase(a)).toEqual(expected)
+  })
+})
+
 describe('initialise name', () => {
   it.each([
     [null, null, null],
@@ -26,5 +36,35 @@ describe('initialise name', () => {
     ['Double barrelled', 'Robert-John Smith-Jones-Wilson', 'R. Smith-Jones-Wilson'],
   ])('%s initialiseName(%s, %s)', (_: string, a: string, expected: string) => {
     expect(initialiseName(a)).toEqual(expected)
+  })
+})
+
+const criminogenicNeedsData = {
+  accommodation: {
+    accLinkedToHarm: 'NO',
+    accLinkedToReoffending: 'YES',
+    accStrengths: 'NO',
+    accOtherWeightedScore: '6',
+    accThreshold: 'YES',
+  },
+  educationTrainingEmployability: {
+    eteLinkedToHarm: 'NO',
+    eteLinkedToReoffending: 'YES',
+    eteStrengths: 'YES',
+    eteOtherWeightedScore: '2',
+    eteThreshold: 'YES',
+  },
+  healthAndWellbeing: {
+    emoLinkedToHarm: 'NO',
+    emoLinkedToReoffending: 'NO',
+    emoStrengths: 'NO',
+    emoOtherWeightedScore: 'N/A',
+    emoThreshold: 'N/A',
+  },
+}
+
+describe('convert criminogenic needs data to renderable content', () => {
+  it.each([['JSON', criminogenicNeedsData]])('%s camelToTitleCase(%s, %s)', (_: string, a: NonNullable<unknown>) => {
+    expect(renderCriminogenicNeeds(a)).toEqual(renderCriminogenicNeeds(criminogenicNeedsData))
   })
 })

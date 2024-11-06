@@ -6,3 +6,8 @@
   height: 100vh;
   object-fit:contain;
 }
+
+.govuk-select--small{
+  min-width: 5em;
+  max-width: 5em;
+}

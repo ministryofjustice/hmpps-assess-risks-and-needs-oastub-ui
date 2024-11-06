@@ -1,0 +1,40 @@
+{%- from "govuk/components/select/macro.njk"    import govukSelect -%}
+{%- from "../../_components/summary-card/macro.njk"   import appSummaryCard %}
+
+{% macro criminogenicNeedsTab(options, fakerData) %}
+
+{% set needSections = renderCriminogenicNeeds(fakerData.criminogenicNeedsData) %}
+
+{% for needSection in needSections %}
+    {% set html %}
+      <table>
+      {% for need in needSection.values %}
+          <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+              {{ govukSelect({
+                  classes: "govuk-select--small",
+                  label: {
+                      text: need.item | camelToTitleCase,
+                      classes: "govuk-label--s"
+                  },
+                  id: need.item,
+                  name: need.item,
+                  items: need.options,
+                  attributes: {'data-input-group': need.item },
+                  value: need.value
+              }) }}
+              </td>
+          </tr>
+      {% endfor %}
+      </table>
+    {% endset %}
+
+    {{ appSummaryCard({
+      titleText:  needSection.group | camelToTitleCase,
+      attributes: {'data-qa': 'activityAndComplianceCard'},
+      classes: 'govuk-!-margin-bottom-6 app-summary-card--large-title',
+      html: html
+    }) }}
+
+{% endfor %}
+{% endmacro %}
