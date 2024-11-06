@@ -53,8 +53,8 @@ export default function routes({ coordinatorService, handoverService }: Services
         oasysAssessmentPk,
         planType: 'INITIAL',
         userDetails: {
-          id: `OAStub - ${user.identifier}`,
-          name: `OAStub - ${user.displayName}`,
+          id: user.identifier,
+          name: user.displayName,
         },
       })
     } catch (e) {
@@ -165,7 +165,7 @@ const generateFakerData = () => ({
     sexuallyMotivatedOffenceHistory: faker.helpers.arrayElement(['YES', 'NO']),
   },
   user: {
-    identifier: randomUUID(),
+    identifier: `OAStub-${randomUUID()}`.substring(0, 30),
     displayName: faker.person.fullName(),
     accessMode: 'READ_WRITE',
     returnUrl: config.domain,
