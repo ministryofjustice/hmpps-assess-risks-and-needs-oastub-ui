@@ -1,0 +1,145 @@
+.app-summary-card {
+  border: 1px solid $govuk-border-colour;
+
+  /* Card header */
+  .app-summary-card__header {
+    align-items: center;
+    background-color: govuk-colour("light-grey");
+    padding: govuk-spacing(3);
+
+    @include govuk-media-query($from: desktop) {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+    }
+  }
+
+  .app-summary-card__title {
+    @include govuk-font($size: 19);
+    margin: 0;
+  }
+
+  .app-summary-card__meta {
+    @include govuk-font($size: 16);
+    display: block;
+    margin: 0;
+  }
+
+  .app-summary-card__actions {
+    @include govuk-font($size: 19);
+  }
+
+  .app-summary-card__actions-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .app-summary-card__actions-list-item {
+    display: block;
+    white-space: nowrap;
+
+    @include govuk-media-query($from: desktop) {
+      display: inline-block;
+      margin-left: govuk-spacing(2);
+      text-align: right;
+    }
+  }
+
+  .app-summary-card__actions-list-item:first-child {
+    margin-left: 0;
+  }
+
+  /* Card body */
+  .app-summary-card__body {
+    @include govuk-font($size: 19);
+    padding: govuk-spacing(3);
+  }
+
+  .govuk-summary-list,
+  .govuk-table {
+    margin-bottom: 0;
+  }
+
+  .govuk-summary-list__row:last-child,
+  .govuk-summary-list__row:last-child > *,
+  .govuk-table__row:last-child .govuk-table__cell {
+    border-bottom: 0;
+  }
+}
+
+.app-summary-card--large-title .app-summary-card__title {
+  @include govuk-font($size: 24, $weight: bold);
+}
+
+@media print {
+  .app-summary-card__header {
+    break-inside: avoid;
+  }
+
+  .app-summary-card__actions {
+    display: none;
+  }
+}
+
+.app-compliance-tag--compact {
+  width: 20px;
+  text-align: center;
+  float: right;
+}
+
+
+.app-compliance-panel {
+  padding: govuk-spacing(3);
+  color: govuk-colour("white");
+  background: govuk-colour("dark-grey");
+
+  p, ul, li, h2, h3, a {
+    color: inherit;
+  }
+}
+
+.app-compliance-panel--red {
+  background: govuk-colour("red");
+}
+
+.app-compliance-panel--green {
+  background: govuk-colour("green");
+}
+
+.app-compliance-panel--blue {
+  background: govuk-colour("blue");
+}
+
+.app-compliance-panel--orange {
+  background: govuk-colour("orange");
+}
+
+.app-summary-card--compliance {
+  border-bottom-width: 0;
+}
+
+.app-tag--dark-red {
+  background: govuk-colour("red");
+}
+
+
+.govuk-tag {
+  display: inline-block;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+  letter-spacing: 1px;
+  max-width: none;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "GDS Transport", arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 700;
+  font-size: 1rem;
+  padding-top: 5px;
+  padding-right: 8px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+}
+

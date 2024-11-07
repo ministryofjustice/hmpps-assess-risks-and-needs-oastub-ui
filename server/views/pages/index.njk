@@ -11,6 +11,7 @@
 {% from "../partials/tabs/subject-details-tab.njk" import subjectDetailsTab %}
 {% from "../partials/tabs/practioner-details-tab.njk" import practionerDetailsTab %}
 {% from "../partials/tabs/versions-tab.njk" import versionsTab %}
+{% from "../partials/tabs/criminogenic-needs-tab.njk" import criminogenicNeedsTab %}
 
 {% set hideBackLink = true %}
 
@@ -66,7 +67,7 @@
         {{ govukDetails({
           summaryText: "What is this?",
           text: "Use the below sections to customise the handover session.
-          This allows you to specify details about the subject, practioner or version information.
+          This allows you to specify details about the subject, practioner, and version and criminogenic needs information.
           When ready, click 'Create handover link' to generate your unique, one-time link."
         }) }}
 
@@ -91,6 +92,13 @@
             id: "versions",
             panel: {
               html: versionsTab(options, fakerData)
+            }
+          },
+          {
+            label: "Criminogenic Needs",
+            id: "criminogenicNeeds",
+            panel: {
+              html: criminogenicNeedsTab(options, fakerData)
             }
           }
         ]

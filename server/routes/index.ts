@@ -65,6 +65,72 @@ export default function routes({ coordinatorService, handoverService }: Services
       }
     }
 
+    const crimNeedsData = {
+      accommodation: {
+        accLinkedToHarm: req.body.accLinkedToHarm,
+        accLinkedToReoffending: req.body.accLinkedToReoffending,
+        accStrengths: req.body.accStrengths,
+        accOtherWeightedScore: req.body.accStrengths,
+        accThreshold: req.body.accThreshold,
+      },
+      educationTrainingEmployability: {
+        eteLinkedToHarm: req.body.eteLinkedToHarm,
+        eteLinkedToReoffending: req.body.eteLinkedToReoffending,
+        eteStrengths: req.body.eteStrengths,
+        eteOtherWeightedScore: req.body.eteOtherWeightedScore,
+        eteThreshold: req.body.eteThreshold,
+      },
+      finance: {
+        financeLinkedToHarm: req.body.financeLinkedToHarm,
+        financeLinkedToReoffending: req.body.financeLinkedToReoffending,
+        financeStrengths: req.body.financeStrengths,
+        financeOtherWeightedScore: req.body.financeOtherWeightedScore,
+        financeThreshold: req.body.financeThreshold,
+      },
+      drugMisuse: {
+        drugLinkedToHarm: req.body.drugLinkedToHarm,
+        drugLinkedToReoffending: req.body.drugLinkedToReoffending,
+        drugStrengths: req.body.drugStrengths,
+        drugOtherWeightedScore: req.body.drugOtherWeightedScore,
+        drugThreshold: req.body.drugThreshold,
+      },
+      alcoholMisuse: {
+        alcoholLinkedToHarm: req.body.alcoholLinkedToHarm,
+        alcoholLinkedToReoffending: req.body.alcoholLinkedToReoffending,
+        alcoholStrengths: req.body.alcoholStrengths,
+        alcoholOtherWeightedScore: req.body.alcoholOtherWeightedScore,
+        alcoholThreshold: req.body.alcoholThreshold,
+      },
+      healthAndWellbeing: {
+        emoLinkedToHarm: req.body.emoLinkedToHarm,
+        emoLinkedToReoffending: req.body.emoLinkedToReoffending,
+        emoStrengths: req.body.emoStrengths,
+        emoOtherWeightedScore: req.body.emoOtherWeightedScore,
+        emoThreshold: req.body.emoThreshold,
+      },
+      personalRelationshipsAndCommunity: {
+        relLinkedToHarm: req.body.relLinkedToHarm,
+        relLinkedToReoffending: req.body.relLinkedToReoffending,
+        relStrengths: req.body.relStrengths,
+        relOtherWeightedScore: req.body.relOtherWeightedScore,
+        relThreshold: req.body.relThreshold,
+      },
+      thinkingBehaviourAndAttitudes: {
+        thinkLinkedToHarm: req.body.thinkLinkedToHarm,
+        thinkLinkedToReoffending: req.body.thinkLinkedToReoffending,
+        thinkStrengths: req.body.thinkStrengths,
+        thinkOtherWeightedScore: req.body.thinkOtherWeightedScore,
+        thinkThreshold: req.body.thinkThreshold,
+      },
+      lifestyleAndAssociates: {
+        lifestyleLinkedToHarm: req.body.lifestyleLinkedToHarm,
+        lifestyleLinkedToReoffending: req.body.lifestyleLinkedToReoffending,
+        lifestyleStrengths: req.body.lifestyleStrengths,
+        lifestyleOtherWeightedScore: req.body.lifestyleOtherWeightedScore,
+        lifestyleThreshold: req.body.lifestyleThreshold,
+      },
+    }
+
     const link = await handoverService.createHandoverLink(
       {
         user,
@@ -72,6 +138,7 @@ export default function routes({ coordinatorService, handoverService }: Services
         oasysAssessmentPk,
         assessmentVersion: versions.assessmentVersion,
         planVersion: versions.planVersion,
+        criminogenicNeedsData: crimNeedsData,
       },
       targetService,
     )
@@ -106,6 +173,71 @@ const generateFakerData = () => ({
   versions: {
     oasysAssessmentPk: Math.floor(100_000 + Math.random() * 900_000),
     assessmentVersion: randomUUID(),
+  },
+  criminogenicNeedsData: {
+    accommodation: {
+      accLinkedToHarm: faker.helpers.arrayElement(['YES', 'NO']),
+      accLinkedToReoffending: faker.helpers.arrayElement(['YES', 'NO']),
+      accStrengths: faker.helpers.arrayElement(['YES', 'NO']),
+      accOtherWeightedScore: faker.helpers.arrayElement(['1', '2', '3', '4', '5', '6']),
+      accThreshold: faker.helpers.arrayElement(['YES', 'NO']),
+    },
+    educationTrainingEmployability: {
+      eteLinkedToHarm: faker.helpers.arrayElement(['YES', 'NO']),
+      eteLinkedToReoffending: faker.helpers.arrayElement(['YES', 'NO']),
+      eteStrengths: faker.helpers.arrayElement(['YES', 'NO']),
+      eteOtherWeightedScore: faker.helpers.arrayElement(['1', '2', '3', '4', '5', '6']),
+      eteThreshold: faker.helpers.arrayElement(['YES', 'NO']),
+    },
+    finance: {
+      financeLinkedToHarm: faker.helpers.arrayElement(['YES', 'NO']),
+      financeLinkedToReoffending: faker.helpers.arrayElement(['YES', 'NO']),
+      financeStrengths: faker.helpers.arrayElement(['YES', 'NO']),
+      financeOtherWeightedScore: 'N/A',
+      financeThreshold: 'N/A',
+    },
+    drugMisuse: {
+      drugLinkedToHarm: faker.helpers.arrayElement(['YES', 'NO']),
+      drugLinkedToReoffending: faker.helpers.arrayElement(['YES', 'NO']),
+      drugStrengths: faker.helpers.arrayElement(['YES', 'NO']),
+      drugOtherWeightedScore: faker.helpers.arrayElement(['YES', 'NO']),
+      drugThreshold: faker.helpers.arrayElement(['YES', 'NO']),
+    },
+    alcoholMisuse: {
+      alcoholLinkedToHarm: faker.helpers.arrayElement(['YES', 'NO']),
+      alcoholLinkedToReoffending: faker.helpers.arrayElement(['YES', 'NO']),
+      alcoholStrengths: faker.helpers.arrayElement(['YES', 'NO']),
+      alcoholOtherWeightedScore: faker.helpers.arrayElement(['1', '2', '3', '4', '5', '6']),
+      alcoholThreshold: faker.helpers.arrayElement(['YES', 'NO']),
+    },
+    healthAndWellbeing: {
+      emoLinkedToHarm: faker.helpers.arrayElement(['YES', 'NO']),
+      emoLinkedToReoffending: faker.helpers.arrayElement(['YES', 'NO']),
+      emoStrengths: faker.helpers.arrayElement(['YES', 'NO']),
+      emoOtherWeightedScore: 'N/A',
+      emoThreshold: 'N/A',
+    },
+    personalRelationshipsAndCommunity: {
+      relLinkedToHarm: faker.helpers.arrayElement(['YES', 'NO']),
+      relLinkedToReoffending: faker.helpers.arrayElement(['YES', 'NO']),
+      relStrengths: faker.helpers.arrayElement(['YES', 'NO']),
+      relOtherWeightedScore: faker.helpers.arrayElement(['1', '2', '3', '4', '5', '6']),
+      relThreshold: faker.helpers.arrayElement(['YES', 'NO']),
+    },
+    thinkingBehaviourAndAttitudes: {
+      thinkLinkedToHarm: faker.helpers.arrayElement(['YES', 'NO']),
+      thinkLinkedToReoffending: faker.helpers.arrayElement(['YES', 'NO']),
+      thinkStrengths: faker.helpers.arrayElement(['YES', 'NO']),
+      thinkOtherWeightedScore: faker.helpers.arrayElement(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']),
+      thinkThreshold: faker.helpers.arrayElement(['YES', 'NO']),
+    },
+    lifestyleAndAssociates: {
+      lifestyleLinkedToHarm: 'N/A',
+      lifestyleLinkedToReoffending: 'N/A',
+      lifestyleStrengths: 'N/A',
+      lifestyleOtherWeightedScore: faker.helpers.arrayElement(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']),
+      lifestyleThreshold: faker.helpers.arrayElement(['YES', 'NO']),
+    },
   },
 })
 

@@ -2,7 +2,7 @@
 import path from 'path'
 import nunjucks from 'nunjucks'
 import express from 'express'
-import { initialiseName } from './utils'
+import { camelToTitleCase, initialiseName, renderCriminogenicNeeds } from './utils'
 import { ApplicationInfo } from '../applicationInfo'
 import config from '../config'
 
@@ -41,4 +41,6 @@ export default function nunjucksSetup(app: express.Express, applicationInfo: App
   )
 
   njkEnv.addFilter('initialiseName', initialiseName)
+  njkEnv.addFilter('camelToTitleCase', camelToTitleCase)
+  njkEnv.addGlobal('renderCriminogenicNeeds', renderCriminogenicNeeds)
 }
