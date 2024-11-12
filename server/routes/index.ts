@@ -33,7 +33,9 @@ export default function routes({ coordinatorService, handoverService }: Services
       gender: req.body.gender,
       dateOfBirth: req.body['date-of-birth'],
       location: req.body.location,
-      sexuallyMotivatedOffenceHistory: req.body['sexually-motivated-offence-history'],
+      ...(req.body['sexually-motivated-offence-history'] && {
+        sexuallyMotivatedOffenceHistory: req.body['sexually-motivated-offence-history'],
+      }),
     }
 
     const user = {
@@ -162,7 +164,7 @@ const generateFakerData = () => ({
       faker.date.past({ years: 70, refDate: DateTime.now().minus({ years: 18 }).toISODate() }),
     ).toFormat('yyyy-MM-dd'),
     location: faker.helpers.arrayElement(['COMMUNITY', 'PRISON']),
-    sexuallyMotivatedOffenceHistory: faker.helpers.arrayElement(['YES', 'NO']),
+    sexuallyMotivatedOffenceHistory: '',
   },
   user: {
     identifier: `OAStub-${randomUUID()}`.substring(0, 30),

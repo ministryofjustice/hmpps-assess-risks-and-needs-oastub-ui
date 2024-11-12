@@ -102,6 +102,7 @@ export default {
       kind: 'text',
     },
     options: [
+      { text: '', value: '', kind: 'option' },
       { text: 'No', value: 'NO', kind: 'option' },
       { text: 'Yes', value: 'YES', kind: 'option' },
     ],
