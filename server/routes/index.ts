@@ -47,7 +47,7 @@ export default function routes({ coordinatorService, handoverService }: Services
 
     const versions = {
       assessmentVersion: req.body['assessment-version'],
-      planVersion: req.body['sentence-plan-version'],
+      sentencePlanVersion: req.body['sentence-plan-version'],
     }
 
     try {
@@ -139,7 +139,7 @@ export default function routes({ coordinatorService, handoverService }: Services
         subjectDetails,
         oasysAssessmentPk,
         assessmentVersion: versions.assessmentVersion,
-        planVersion: versions.planVersion,
+        sentencePlanVersion: versions.sentencePlanVersion,
         criminogenicNeedsData: crimNeedsData,
       },
       targetService,
@@ -174,7 +174,6 @@ const generateFakerData = () => ({
   },
   versions: {
     oasysAssessmentPk: Math.floor(100_000 + Math.random() * 900_000),
-    assessmentVersion: randomUUID(),
   },
   criminogenicNeedsData: {
     accommodation: {
