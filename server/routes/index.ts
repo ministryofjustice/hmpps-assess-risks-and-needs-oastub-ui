@@ -167,8 +167,8 @@ const generateFakerData = () => ({
     sexuallyMotivatedOffenceHistory: '',
   },
   user: {
-    identifier: `OAStub-${randomUUID()}`.substring(0, 30),
-    displayName: faker.person.fullName(),
+    identifier: `OAStub-${randomUUID()}`.substring(0, 15),
+    displayName: `${faker.person.firstName()} ${faker.person.lastName()}`,
     accessMode: 'READ_WRITE',
     returnUrl: config.domain,
   },
