@@ -63,8 +63,140 @@ const criminogenicNeedsData = {
   },
 }
 
+const expected = [
+  {
+    group: 'accommodation',
+    values: [
+      {
+        item: 'accLinkedToHarm',
+        options: [
+          { text: 'No', value: 'NO' },
+          { text: 'Yes', value: 'YES' },
+        ],
+        value: 'NO',
+      },
+      {
+        item: 'accLinkedToReoffending',
+        options: [
+          { text: 'No', value: 'NO' },
+          { text: 'Yes', value: 'YES' },
+        ],
+        value: 'YES',
+      },
+      {
+        item: 'accStrengths',
+        options: [
+          { text: 'No', value: 'NO' },
+          { text: 'Yes', value: 'YES' },
+        ],
+        value: 'NO',
+      },
+      {
+        item: 'accOtherWeightedScore',
+        options: [
+          { text: '0', value: '0' },
+          { text: '1', value: '1' },
+          { text: '2', value: '2' },
+          { text: '3', value: '3' },
+          { text: '4', value: '4' },
+          { text: '5', value: '5' },
+          { text: '6', value: '6' },
+        ],
+        value: '6',
+      },
+      {
+        item: 'accThreshold',
+        options: [
+          { text: 'No', value: 'NO' },
+          { text: 'Yes', value: 'YES' },
+        ],
+        value: 'YES',
+      },
+    ],
+  },
+  {
+    group: 'educationTrainingEmployability',
+    values: [
+      {
+        item: 'eteLinkedToHarm',
+        options: [
+          { text: 'No', value: 'NO' },
+          { text: 'Yes', value: 'YES' },
+        ],
+        value: 'NO',
+      },
+      {
+        item: 'eteLinkedToReoffending',
+        options: [
+          { text: 'No', value: 'NO' },
+          { text: 'Yes', value: 'YES' },
+        ],
+        value: 'YES',
+      },
+      {
+        item: 'eteStrengths',
+        options: [
+          { text: 'No', value: 'NO' },
+          { text: 'Yes', value: 'YES' },
+        ],
+        value: 'YES',
+      },
+      {
+        item: 'eteOtherWeightedScore',
+        options: [
+          { text: '0', value: '0' },
+          { text: '1', value: '1' },
+          { text: '2', value: '2' },
+          { text: '3', value: '3' },
+          { text: '4', value: '4' },
+        ],
+        value: '2',
+      },
+      {
+        item: 'eteThreshold',
+        options: [
+          { text: 'No', value: 'NO' },
+          { text: 'Yes', value: 'YES' },
+        ],
+        value: 'YES',
+      },
+    ],
+  },
+  {
+    group: 'healthAndWellbeing',
+    values: [
+      {
+        item: 'emoLinkedToHarm',
+        options: [
+          { text: 'No', value: 'NO' },
+          { text: 'Yes', value: 'YES' },
+        ],
+        value: 'NO',
+      },
+      {
+        item: 'emoLinkedToReoffending',
+        options: [
+          { text: 'No', value: 'NO' },
+          { text: 'Yes', value: 'YES' },
+        ],
+        value: 'NO',
+      },
+      {
+        item: 'emoStrengths',
+        options: [
+          { text: 'No', value: 'NO' },
+          { text: 'Yes', value: 'YES' },
+        ],
+        value: 'NO',
+      },
+      { item: 'emoOtherWeightedScore', options: [{ text: 'N/A', value: 'N/A' }], value: 'N/A' },
+      { item: 'emoThreshold', options: [{ text: 'N/A', value: 'N/A' }], value: 'N/A' },
+    ],
+  },
+]
+
 describe('convert criminogenic needs data to renderable content', () => {
   it.each([['JSON', criminogenicNeedsData]])('%s camelToTitleCase(%s, %s)', (_: string, a: NonNullable<unknown>) => {
-    expect(renderCriminogenicNeeds(a)).toEqual(renderCriminogenicNeeds(criminogenicNeedsData))
+    expect(renderCriminogenicNeeds(a)).toEqual(expected)
   })
 })
