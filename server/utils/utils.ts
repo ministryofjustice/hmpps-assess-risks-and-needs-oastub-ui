@@ -17,14 +17,61 @@ const properCaseName = (name: string): string => (isBlank(name) ? '' : name.spli
 export const renderCriminogenicNeeds = (needs: NonNullable<unknown>) => {
   return Object.entries(needs).flatMap(([key, value]) => {
     const data = Object.entries(value).map(([itemKey, itemValue]) => {
-      return { item: itemKey, value: itemValue, options: optionValues(itemValue as string) }
+      return {
+        item: itemKey,
+        value: itemValue,
+        options: optionValues(itemValue as string, key as string, itemKey as string),
+      }
     })
     return { group: key, values: data }
   })
 }
 
-const optionValues = (value: string) => {
-  const numArray = Array.from({ length: 10 }, (_, i) => (i + 1).toString())
+const optionValues = (value: string, key: string, itemKey: string) => {
+  if (itemKey.includes('WeightedScore')) {
+    let upperBound
+    // eslint-disable-next-line default-case
+    switch (key) {
+      case 'accommodation':
+        upperBound = 6
+        break
+      case 'educationTrainingEmployability':
+        upperBound = 4
+        break
+      case 'finance':
+        upperBound = undefined
+        break
+      case 'drugMisuse':
+        upperBound = 8
+        break
+      case 'alcoholMisuse':
+        upperBound = 4
+        break
+      case 'healthAndWellbeing':
+        upperBound = undefined
+        break
+      case 'personalRelationshipsAndCommunity':
+        upperBound = 6
+        break
+      case 'thinkingBehaviourAndAttitudes':
+        upperBound = 10
+        break
+      case 'lifestyleAndAssociates':
+        upperBound = 10
+        break
+    }
+    if (upperBound === undefined) {
+      return [{ text: 'N/A', value: 'N/A' }]
+    }
+
+    const list = []
+    for (let i = 0; i <= upperBound; i += 1) {
+      list.push({ text: i.toString(), value: i.toString() })
+    }
+
+    return list
+  }
+
   if (['NO', 'YES'].includes(value)) {
     return [
       { text: 'No', value: 'NO' },
@@ -32,11 +79,6 @@ const optionValues = (value: string) => {
     ]
   }
 
-  if (numArray.includes(value)) {
-    return numArray.map(num => {
-      return { text: num.toString(), value: num.toString() }
-    })
-  }
   return [{ text: 'N/A', value: 'N/A' }]
 }
 
