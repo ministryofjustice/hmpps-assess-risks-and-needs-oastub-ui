@@ -155,7 +155,18 @@ export default function routes({ coordinatorService, handoverService }: Services
 
 const generateFakerData = () => ({
   subject: {
-    crn: `X${Math.floor(100_000 + Math.random() * 900_000)}`,
+    crn: faker.helpers.arrayElement([
+      'X778160',
+      'X777916',
+      'X765523',
+      'X767016',
+      'X767644',
+      'X769773',
+      'X827375',
+      'X770507',
+      'X775086',
+      'X776171',
+    ]),
     pnc: `01/${Math.floor(10_000_000 + Math.random() * 90_000_000)}A`,
     givenName: faker.person.firstName(),
     familyName: faker.person.lastName(),
