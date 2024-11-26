@@ -57,7 +57,7 @@ const optionValues = (value: string, key: string, itemKey: string) => {
         upperBound = 10
         break
       case 'lifestyleAndAssociates':
-        upperBound = 10
+        upperBound = 6
         break
     }
     if (upperBound === undefined) {
