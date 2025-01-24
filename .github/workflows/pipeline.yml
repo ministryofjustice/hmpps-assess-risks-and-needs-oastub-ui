@@ -62,16 +62,13 @@ jobs:
 
   deploy_test:
     name: Deploy to test
+    if: inputs.deploy_to == 'test'
     needs:
       - build
     uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2
+    secrets: inherit
     runs-on: ubuntu-latest
-    if: inputs.deploy_to == 'test'
-    environment:
-      name: 'test'
-    steps:
-      - name: Deploy
-        with:
-          environment: 'test'
-          app_version: '${{ needs.build.outputs.app_version }}'
-          helm_timeout: '5m'
+    with:
+      environment: 'test'
+      app_version: '${{ needs.build.outputs.app_version }}'
+      helm_timeout: '5m'
