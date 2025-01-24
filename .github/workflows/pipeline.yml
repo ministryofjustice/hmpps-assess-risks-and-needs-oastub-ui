@@ -67,7 +67,6 @@ jobs:
       - build
     uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2
     secrets: inherit
-    runs-on: ubuntu-latest
     with:
       environment: 'test'
       app_version: '${{ needs.build.outputs.app_version }}'
