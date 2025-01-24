@@ -61,16 +61,17 @@ jobs:
       helm_timeout: '5m'
 
   deploy_test:
-    name: Deploy to ${{ inputs.deploy_to }}
-    needs: build
+    name: Deploy to test
+    needs:
+      - build
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2
     runs-on: ubuntu-latest
-    if: inputs.deploy_to != '' # Only run if deploy_to is specified
+    if: inputs.deploy_to == 'test'
     environment:
-      name: ${{ inputs.deploy_to }}
+      name: 'test'
     steps:
       - name: Deploy
-        uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2 # Check correct path
         with:
-          environment: ${{ inputs.deploy_to }}
-          app_version: ${{ github.sha }}  # Use commit SHA for version
-          helm_timeout: 5m
+          environment: 'test'
+          app_version: '${{ needs.build.outputs.app_version }}'
+          helm_timeout: '5m'
