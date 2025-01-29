@@ -50,7 +50,7 @@ jobs:
       environment: ${{ matrix.environments }}
   build:
     name: Build docker image from hmpps-github-actions
-    uses: ./.github/workflows/docker_build.yml@v2 # WORKFLOW_VERSION
+    uses: ./.github/workflows/docker_build.yml
     needs:
       - node_unit_tests
     with:
