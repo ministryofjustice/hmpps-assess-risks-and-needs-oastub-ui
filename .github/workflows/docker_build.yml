@@ -58,8 +58,7 @@ jobs:
       - name: Define Image Tags
         id: define_tags
         run: |
-          REPO=${{ inputs.docker_registry }}/${{ inputs.registry_org }}/${{ github.event.repository.name }}
-          echo "IMAGE_TAG=${REPO}:pr-${{ github.event.number }}" >> $GITHUB_ENV
+          echo "IMAGE_TAG=pr-${{ github.event.number }}" >> $GITHUB_ENV
           echo "PUSH_IMAGE=true" >> $GITHUB_ENV
 
       - uses: ministryofjustice/hmpps-github-actions/.github/actions/build-test-and-deploy/build_docker@v2 # WORKFLOW_VERSION
