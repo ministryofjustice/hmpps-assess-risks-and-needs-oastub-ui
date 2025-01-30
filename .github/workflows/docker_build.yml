@@ -59,24 +59,15 @@ jobs:
         id: define_tags
         run: |
           REPO=${{ inputs.docker_registry }}/${{ inputs.registry_org }}/${{ github.event.repository.name }}
-          
-          echo "${REPO}:pr-${{ github.event.number }}"
-          
-#          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-#            echo "IMAGE_TAG=${REPO}:pr-${{ github.event.number }}" >> $GITHUB_ENV
-#            echo "PUSH_IMAGE=true" >> $GITHUB_ENV
-#          else
-#            echo "IMAGE_TAG=${REPO}:${{ steps.app_version.outputs.version }}" >> $GITHUB_ENV
-#            echo "LATEST_TAG=${REPO}:latest" >> $GITHUB_ENV
-#            echo "PUSH_IMAGE=${{ inputs.push }}" >> $GITHUB_ENV
-#          fi
+          echo "IMAGE_TAG=${REPO}:pr-${{ github.event.number }}" >> $GITHUB_ENV
+          echo "PUSH_IMAGE=true" >> $GITHUB_ENV
 
-#      - uses: ministryofjustice/hmpps-github-actions/.github/actions/build-test-and-deploy/build_docker@v2 # WORKFLOW_VERSION
-#        with:
-#          repository_name: ${{ github.event.repository.name }}
-#          docker_registry: ${{ inputs.docker_registry }}
-#          registry_org: ${{ inputs.registry_org }}
-#          additional_docker_tag: ${{ inputs.additional_docker_tag }}
-#          push: ${{ env.PUSH_IMAGE }}
-#          app_version: ${{ env.IMAGE_TAG }}
-#          additional_docker_build_args: ${{ inputs.additional_docker_build_args }}
+      - uses: ministryofjustice/hmpps-github-actions/.github/actions/build-test-and-deploy/build_docker@v2 # WORKFLOW_VERSION
+        with:
+          repository_name: ${{ github.event.repository.name }}
+          docker_registry: ${{ inputs.docker_registry }}
+          registry_org: ${{ inputs.registry_org }}
+          additional_docker_tag: ${{ inputs.additional_docker_tag }}
+          push: ${{ env.PUSH_IMAGE }}
+          app_version: ${{ env.IMAGE_TAG }}
+          additional_docker_build_args: ${{ inputs.additional_docker_build_args }}
