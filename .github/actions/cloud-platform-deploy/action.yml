@@ -133,7 +133,7 @@ runs:
           --force \
           --install \
           --reset-values \
-          --set 'generic-service.image.tag=${{ inputs.version }}' \
+          --set 'generic-service.image.tag=pr-${{ github.event.pull_request.number }}' \
           --set "generic-service.nameOverride=${{ inputs.release_name }}" \
           --set "generic-service.ingress.host=pr-${{ github.event.pull_request.number }}.arns-oastub-dev.hmpps.service.justice.gov.uk" \
           --set "generic-prometheus-alerts.targetApplication=${{ inputs.release_name }}" \
