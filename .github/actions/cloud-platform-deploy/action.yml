@@ -134,6 +134,8 @@ runs:
           --install \
           --reset-values \
           --set 'generic-service.image.tag=${{ inputs.version }}' \
+          --set "generic-service.nameOverride=${{ inputs.release_name }}" \
+          --set "generic-service.ingress.host=pr-${{ github.event.pull_request.number }}.arns-oastub-dev.hmpps.service.justice.gov.uk" \
           --set 'version=${{ inputs.version }}' \
           --timeout ${{ inputs.helm_timeout }} \
           --values "helm_deploy/values-${{ steps.env.outputs.environment }}.yaml" \
