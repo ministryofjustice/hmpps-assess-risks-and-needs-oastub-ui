@@ -7,10 +7,6 @@ on:
         description: Environment
         required: true
         type: string
-      app_version:
-        description: App version
-        required: true
-        type: string
       slack_notification:
         description: Slack notification
         default: true
@@ -51,7 +47,6 @@ jobs:
         id: cleanup
         with:
           environment: ${{ inputs.environment }}
-          version: ${{ inputs.app_version }}
           api: https://${{ secrets.KUBE_CLUSTER }}
           cert: ${{ secrets.KUBE_CERT }}
           cluster: ${{ secrets.KUBE_CLUSTER }}
