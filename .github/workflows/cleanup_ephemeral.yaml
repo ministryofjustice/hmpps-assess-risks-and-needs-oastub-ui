@@ -1,0 +1,61 @@
+name: Remove PR docker image and cleanup ephemeral environment
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: Environment
+        required: true
+        type: string
+      app_version:
+        description: App version
+        required: true
+        type: string
+      slack_notification:
+        description: Slack notification
+        default: true
+        required: false
+        type: boolean
+      helm_timeout:
+        description: Helm timeout
+        default: "5m"
+        required: false
+        type: string
+      release_name:
+        description: Helm release name
+        default: "PROJECT_NAME"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  deploy_env:
+    name: Uninstall PR from ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    environment: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: azure/setup-kubectl@v4
+        id: install
+        with:
+          version: latest
+
+      - uses: ./.github/actions/cloud-platform-cleanup # WORKFLOW_VERSION
+        id: cleanup
+        with:
+          environment: ${{ inputs.environment }}
+          version: ${{ inputs.app_version }}
+          api: https://${{ secrets.KUBE_CLUSTER }}
+          cert: ${{ secrets.KUBE_CERT }}
+          cluster: ${{ secrets.KUBE_CLUSTER }}
+          namespace: ${{ secrets.KUBE_NAMESPACE }}
+          token: ${{ secrets.KUBE_TOKEN }}
+          helm_timeout: ${{ inputs.helm_timeout }}
+          release_name: ${{ inputs.release_name }}
