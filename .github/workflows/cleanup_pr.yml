@@ -7,8 +7,6 @@ on:
 jobs:
   cleanup_dev:
     name: Cleanup the PR from the development environment
-    needs:
-      - build
     uses: ./.github/workflows/cleanup_ephemeral.yml
     secrets: inherit
     with:
