@@ -100,7 +100,7 @@
     "connect-flash": "^0.1.1",
     "connect-redis": "^7.1.1",
     "csurf": "^1.11.0",
-    "express": "^4.21.1",
+    "express": "^4.21.2",
     "express-session": "^1.18.0",
     "govuk-frontend": "^5.7.0",
     "helmet": "^8.0.0",
