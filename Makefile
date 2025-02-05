@@ -41,7 +41,7 @@ lint: ## Runs the linter.
 	docker compose ${DEV_COMPOSE_FILES} run --rm --no-deps oasys-ui npm run lint
 
 lint-fix: ## Automatically fixes linting issues.
-	docker compose ${DEV_COMPOSE_FILES} run --rm --no-deps oasys-ui npm run lint:fix
+	docker compose ${DEV_COMPOSE_FILES} run --rm --no-deps oasys-ui npm run lint-fix
 
 test-up: ## Stands up a test environment.
 	docker compose ${TEST_COMPOSE_FILES} pull --policy missing
