@@ -122,8 +122,8 @@ assets/stylesheets/*.css
 .vscode
 dist/
 test_results/
-integration_tests/videos/
-integration_tests/screenshots/
+cypress/videos/
+cypress/screenshots/
 */*.iml
 **/Chart.lock
 **/.DS_Store

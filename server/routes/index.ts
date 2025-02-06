@@ -8,7 +8,6 @@ import fields from './formData'
 import logger from '../../logger'
 import config from '../config'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function routes({ coordinatorService, handoverService }: Services): Router {
   const router = Router()
   const get = (path: string | string[], handler: RequestHandler) => router.get(path, asyncMiddleware(handler))
