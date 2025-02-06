@@ -7,6 +7,14 @@
 {% block pageTitle %}{{pageTitle | default(applicationName)}}{% endblock %}
 
 {% block header %}
+  {% if ephemeralDeploymentName %}
+    <div class="ephemeral-env-banner">
+      <span class="govuk-body">
+        <u><strong>Notice</strong></u>:
+        You are viewing an ephemeral deployment for <strong>{{ ephemeralDeploymentName }}</strong>.
+      </span>
+    </div>
+  {% endif %}
   {% include "./header.njk" %}
 {% endblock %}
 

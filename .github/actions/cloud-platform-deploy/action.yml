@@ -128,6 +128,8 @@ runs:
           .generic-service.ingress.host = "pr-${{ github.event.pull_request.number }}." + .generic-service.ingress.host |
           .generic-service.image.tag = "pr-${{ github.event.pull_request.number }}" |
           .generic-service.nameOverride = "${{ inputs.release_name }}" |
+          .generic-service.replicaCount = "1" |
+          .generic-service.env.EPHEMERAL_DEPLOYMENT_NAME = "pr-${{ github.event.pull_request.number }}" |
           .generic-prometheus-alerts.targetApplication = "${{ inputs.release_name }}"
         ' "helm_deploy/values-${{ steps.env.outputs.environment }}.yaml"
 
