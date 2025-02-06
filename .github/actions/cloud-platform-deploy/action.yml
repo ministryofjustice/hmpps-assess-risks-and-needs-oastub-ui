@@ -61,6 +61,9 @@ outputs:
   deployment_changelog:
     description: "The changelog for the deployment"
     value: ${{ steps.version_history.outputs.deployment_changelog }}
+  deployment_ingress_url:
+    description: "Ingress URL for the deployment"
+    value: ${{ steps.get_deployment_ingress_url.outputs.deployment_ingress_url }}
 
 runs:
   using: composite
@@ -155,3 +158,10 @@ runs:
           ${{ steps.check-ip-allowlists.outputs.ALLOWLIST_GROUPS }} \
           ${{ steps.check-ip-allowlists-version.outputs.ALLOWLIST_VERSION }} \
           --wait
+
+    - name: Extract deployment ingress URL
+      id: get_deployment_ingress_url
+      shell: bash
+      run: |
+        ingress_host=$(yq '.generic-service.ingress.host' "helm_deploy/values-${{ steps.env.outputs.environment }}.yaml")
+        echo "deployment_ingress_url=https://${ingress_host}" >> $GITHUB_OUTPUT
