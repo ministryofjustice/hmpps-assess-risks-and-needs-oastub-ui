@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { startCase } from 'lodash'
 
 const properCase = (word: string): string =>

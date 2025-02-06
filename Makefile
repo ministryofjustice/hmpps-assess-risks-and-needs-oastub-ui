@@ -1,7 +1,8 @@
 SHELL = '/bin/bash'
 PROJECT_NAME = hmpps-assess-risks-and-needs
-DEV_COMPOSE_FILES = -f docker/docker-compose.yml -f docker/docker-compose.dev.yml
 LOCAL_COMPOSE_FILES = -f docker/docker-compose.yml -f docker/docker-compose.local.yml
+DEV_COMPOSE_FILES = -f docker/docker-compose.yml -f docker/docker-compose.local.yml -f docker/docker-compose.dev.yml
+TEST_COMPOSE_FILES = -f docker/docker-compose.yml -f docker/docker-compose.test.yml
 export COMPOSE_PROJECT_NAME=${PROJECT_NAME}
 
 default: help
@@ -40,7 +41,36 @@ lint: ## Runs the linter.
 	docker compose ${DEV_COMPOSE_FILES} run --rm --no-deps oasys-ui npm run lint
 
 lint-fix: ## Automatically fixes linting issues.
-	docker compose ${DEV_COMPOSE_FILES} run --rm --no-deps oasys-ui npm run lint:fix
+	docker compose ${DEV_COMPOSE_FILES} run --rm --no-deps oasys-ui npm run lint-fix
+
+test: ## Runs the unit tests.
+	docker compose ${DEV_COMPOSE_FILES} run --rm --no-deps oasys-ui npm run test
+
+test-up: ## Stands up a test environment.
+	docker compose ${TEST_COMPOSE_FILES} pull --policy missing
+	docker compose ${TEST_COMPOSE_FILES} -p ${PROJECT_NAME}-test up --wait
+
+test-down: ## Stops and removes all of the test containers.
+	docker compose ${TEST_COMPOSE_FILES} -p ${PROJECT_NAME}-test down
+
+BASE_URL ?= "http://localhost:7072"
+e2e: ## Run the end-to-end tests locally in the Cypress app. Override the default base URL with BASE_URL=...
+	npm i
+	npx cypress install
+	npx cypress open -c baseUrl=$(BASE_URL)
+
+BASE_URL_CI ?= "http://oasys-ui:3000"
+e2e-ci: ## Run the end-to-end tests in a headless browser. Used in CI. Override the default base URL with BASE_URL_CI=...
+	docker compose ${TEST_COMPOSE_FILES} -p ${PROJECT_NAME}-test run --rm cypress --headless -c baseUrl=${BASE_URL_CI}
+
+save-logs: ## Saves docker container logs in a directory defined by OUTPUT_LOGS_DIR=
+	mkdir -p ${OUTPUT_LOGS_DIR}
+	docker logs ${PROJECT_NAME}-arns-handover-1 > ${OUTPUT_LOGS_DIR}/arns-handover.log
+	docker logs ${PROJECT_NAME}-coordinator-api-1 > ${OUTPUT_LOGS_DIR}/coordinator-api.log
+	docker logs ${PROJECT_NAME}-oasys-ui-1 > ${OUTPUT_LOGS_DIR}/oasys-ui.log
+	docker logs ${PROJECT_NAME}-hmpps-auth-1 > ${OUTPUT_LOGS_DIR}/hmpps-auth.log
+	docker logs ${PROJECT_NAME}-san-ui-1 > ${OUTPUT_LOGS_DIR}/san-ui.log
+	docker logs ${PROJECT_NAME}-san-api-1 > ${OUTPUT_LOGS_DIR}/san-api.log
 
 clean: ## Stops and removes all project containers. Deletes local build/cache directories.
 	docker compose ${LOCAL_COMPOSE_FILES} down
