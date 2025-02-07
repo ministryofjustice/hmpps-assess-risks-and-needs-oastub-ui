@@ -66,7 +66,7 @@ jobs:
           echo "IMAGE_TAG=pr-${{ github.event.number }}" >> $GITHUB_ENV
           echo "PUSH_IMAGE=true" >> $GITHUB_ENV
 
-      - uses: ./github/actions/build_docker
+      - uses: ./.github/actions/build_docker
         with:
           repository_name: ${{ github.event.repository.name }}
           docker_registry: ${{ inputs.docker_registry }}
