@@ -23,6 +23,11 @@ on:
         description: Push docker image to registry flag
         required: true
         type: boolean
+      tag_latest:
+        description: Tag image as 'latest'
+        type: boolean
+        required: false
+        default: true
       docker_multiplatform:
         description: Docker image build multiplatform or not
         required: true
@@ -61,7 +66,7 @@ jobs:
           echo "IMAGE_TAG=pr-${{ github.event.number }}" >> $GITHUB_ENV
           echo "PUSH_IMAGE=true" >> $GITHUB_ENV
 
-      - uses: ministryofjustice/hmpps-github-actions/.github/actions/build-test-and-deploy/build_docker@v2 # WORKFLOW_VERSION
+      - uses: ./github/actions/build_docker
         with:
           repository_name: ${{ github.event.repository.name }}
           docker_registry: ${{ inputs.docker_registry }}
@@ -70,3 +75,4 @@ jobs:
           push: ${{ env.PUSH_IMAGE }}
           app_version: ${{ env.IMAGE_TAG }}
           additional_docker_build_args: ${{ inputs.additional_docker_build_args }}
+          tag_latest: ${{ inputs.tag_latest }}
