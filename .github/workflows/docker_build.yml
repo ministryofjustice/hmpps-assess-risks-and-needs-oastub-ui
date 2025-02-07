@@ -71,7 +71,7 @@ jobs:
           echo "PUSH_IMAGE=true" >> $GITHUB_ENV
 
       - name: Build docker
-        uses: ./.github/actions/build-docker
+        uses: ministryofjustice/hmpps-github-actions/.github/actions/build-test-and-deploy/build_docker@fix-tag-latest
         with:
           repository_name: ${{ github.event.repository.name }}
           docker_registry: ${{ inputs.docker_registry }}
