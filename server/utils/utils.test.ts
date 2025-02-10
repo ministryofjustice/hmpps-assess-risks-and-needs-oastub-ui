@@ -72,6 +72,7 @@ const expected = [
         options: [
           { text: 'No', value: 'NO' },
           { text: 'Yes', value: 'YES' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: 'NO',
       },
@@ -80,6 +81,7 @@ const expected = [
         options: [
           { text: 'No', value: 'NO' },
           { text: 'Yes', value: 'YES' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: 'YES',
       },
@@ -88,6 +90,7 @@ const expected = [
         options: [
           { text: 'No', value: 'NO' },
           { text: 'Yes', value: 'YES' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: 'NO',
       },
@@ -101,6 +104,7 @@ const expected = [
           { text: '4', value: '4' },
           { text: '5', value: '5' },
           { text: '6', value: '6' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: '6',
       },
@@ -109,6 +113,7 @@ const expected = [
         options: [
           { text: 'No', value: 'NO' },
           { text: 'Yes', value: 'YES' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: 'YES',
       },
@@ -122,6 +127,7 @@ const expected = [
         options: [
           { text: 'No', value: 'NO' },
           { text: 'Yes', value: 'YES' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: 'NO',
       },
@@ -130,6 +136,7 @@ const expected = [
         options: [
           { text: 'No', value: 'NO' },
           { text: 'Yes', value: 'YES' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: 'YES',
       },
@@ -138,6 +145,7 @@ const expected = [
         options: [
           { text: 'No', value: 'NO' },
           { text: 'Yes', value: 'YES' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: 'YES',
       },
@@ -149,6 +157,7 @@ const expected = [
           { text: '2', value: '2' },
           { text: '3', value: '3' },
           { text: '4', value: '4' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: '2',
       },
@@ -157,6 +166,7 @@ const expected = [
         options: [
           { text: 'No', value: 'NO' },
           { text: 'Yes', value: 'YES' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: 'YES',
       },
@@ -170,6 +180,7 @@ const expected = [
         options: [
           { text: 'No', value: 'NO' },
           { text: 'Yes', value: 'YES' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: 'NO',
       },
@@ -178,6 +189,7 @@ const expected = [
         options: [
           { text: 'No', value: 'NO' },
           { text: 'Yes', value: 'YES' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: 'NO',
       },
@@ -186,6 +198,7 @@ const expected = [
         options: [
           { text: 'No', value: 'NO' },
           { text: 'Yes', value: 'YES' },
+          { text: 'Null', value: 'NULL' },
         ],
         value: 'NO',
       },
