@@ -68,13 +68,16 @@ const optionValues = (value: string, key: string, itemKey: string) => {
       list.push({ text: i.toString(), value: i.toString() })
     }
 
+    list.push({ text: 'Null', value: 'NULL' })
+
     return list
   }
 
-  if (['NO', 'YES'].includes(value)) {
+  if (['NO', 'YES', 'NULL'].includes(value)) {
     return [
       { text: 'No', value: 'NO' },
       { text: 'Yes', value: 'YES' },
+      { text: 'Null', value: 'NULL' },
     ]
   }
 
