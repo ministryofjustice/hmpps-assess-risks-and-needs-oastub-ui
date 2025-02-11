@@ -167,5 +167,10 @@
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.5",
     "typescript": "^5.7.3"
+  },
+  "overrides": {
+    "@jgoz/esbuild-plugin-typecheck": {
+      "esbuild": "$esbuild"
+    }
   }
 }
