@@ -10,13 +10,13 @@ permissions:
 jobs:
   build:
     name: Build docker image from hmpps-github-actions
-    uses: ./.github/workflows/docker_build.yml
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_build.yml@v2 # WORKFLOW_VERSION
     with:
       docker_registry: 'ghcr.io'
       registry_org: 'ministryofjustice'
-      additional_docker_tag: ${{ inputs.additional_docker_tag }}
+      additional_docker_tag: "pr-${{ github.event.number }}"
       push: ${{ inputs.push || true }}
-      tag_latest: true
+      tag_latest: false
       docker_multiplatform: false
 
   deploy_dev:
