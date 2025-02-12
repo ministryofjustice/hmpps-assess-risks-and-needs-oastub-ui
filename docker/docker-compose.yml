@@ -21,7 +21,7 @@ services:
       LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY: DEBUG
 
   oasys-ui:
-    image: quay.io/hmpps/hmpps-assess-risks-and-needs-oastub-ui:${APP_VERSION:-latest}
+    image: ghcr.io/ministryofjustice/hmpps-assess-risks-and-needs-oastub-ui:${APP_VERSION:-latest}
     build:
       context: ../
       target: production
