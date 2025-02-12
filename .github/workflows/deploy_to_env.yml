@@ -31,24 +31,13 @@ jobs:
   build_docker:
     if: ${{ inputs.image_tag == '' }}
     name: Build docker image
-    uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_build.yml@v2
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_build.yml@upload-image-to-artifacts
     with:
       docker_registry: 'ghcr.io'
       registry_org: 'ministryofjustice'
       tag_latest: false
       push: true
       docker_multiplatform: false
-
-  deploy_env_prebuilt:
-    if: ${{ inputs.image_tag != '' }}
-    name: Deploy pre-built image to environment
-    needs:
-      - helm_lint
-    uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2
-    secrets: inherit
-    with:
-      environment: ${{ inputs.environment }}
-      app_version: ${{ inputs.image_tag }}
 
   deploy_env:
     if: ${{ inputs.image_tag == '' }}
@@ -61,3 +50,14 @@ jobs:
     with:
       environment: ${{ inputs.environment }}
       app_version: ${{ needs.build_docker.outputs.app_version }}
+
+  deploy_env_prebuilt:
+    if: ${{ inputs.image_tag != '' }}
+    name: Deploy pre-built image to environment
+    needs:
+      - helm_lint
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2
+    secrets: inherit
+    with:
+      environment: ${{ inputs.environment }}
+      app_version: ${{ inputs.image_tag }}
