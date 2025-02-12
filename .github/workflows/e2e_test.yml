@@ -29,8 +29,14 @@ jobs:
         run: |
           docker load --input ${{ runner.temp }}/build_image.tar
 
-#      - name: Set APP_VERSION
-#        run: export APP_VERSION=${{ inputs.app_version }}
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Run npm ci
+        run: npm ci
 
       - name: Stand up a test environment
         run: |
