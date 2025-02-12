@@ -43,6 +43,6 @@ jobs:
 
   e2e_test:
     needs: [build_docker]
-    uses: ministryofjustice/hmpps-assess-risks-and-needs-oastub-ui/.github/workflows/e2e_test.yml
+    uses: ministryofjustice/hmpps-assess-risks-and-needs-oastub-ui/.github/workflows/e2e_test.yml@add-e2e-to-pipeline
     with:
       app_version: ${{ needs.build_docker.outputs.app_version }}
