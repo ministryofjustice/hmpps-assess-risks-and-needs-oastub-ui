@@ -47,10 +47,11 @@ jobs:
       load: true
       docker_multiplatform: false
       upload_image_artifact: true
+      image_artifact_retention_days: 2
 
   e2e_test:
     needs: build_docker
-    uses: ministryofjustice/hmpps-assess-risks-and-needs-oastub-ui/.github/workflows/e2e_test.yml@add-e2e-to-pipeline
+    uses: ./.github/workflows/e2e_test.yml
     with:
       app_version: ${{ needs.build_docker.outputs.app_version }}
 
