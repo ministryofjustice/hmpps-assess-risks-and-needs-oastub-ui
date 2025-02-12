@@ -14,6 +14,8 @@ permissions:
 jobs:
   e2e_test:
     runs-on: ubuntu-latest
+    env:
+      APP_VERSION: ${{ inputs.app_version }}
     steps:
       - uses: actions/checkout@v4
 
@@ -27,8 +29,8 @@ jobs:
         run: |
           docker load --input ${{ runner.temp }}/build_image.tar
 
-      - name: Set APP_VERSION
-        run: export APP_VERSION=${{ inputs.app_version }}
+#      - name: Set APP_VERSION
+#        run: export APP_VERSION=${{ inputs.app_version }}
 
       - name: Stand up a test environment
         run: |
