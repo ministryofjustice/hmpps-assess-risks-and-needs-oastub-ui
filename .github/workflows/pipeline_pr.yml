@@ -60,7 +60,7 @@ jobs:
       docker_registry: 'ghcr.io'
       registry_org: 'ministryofjustice'
       app_version: ${{ needs.build_docker.outputs.app_version }}
-      tag_latest: true
+      tag_latest: false
 
   deploy_dev:
     name: Deploy to the development environment
