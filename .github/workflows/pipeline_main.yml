@@ -60,6 +60,7 @@ jobs:
     needs:
       - node_build
       - node_unit_tests
+      - build_docker
       - e2e_test
       - helm_lint
     uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_push.yml@upload-image-to-artifacts
@@ -70,9 +71,11 @@ jobs:
 
   deploy_dev:
     name: Deploy to the development environment
-    needs: publish_docker
+    needs:
+      - build_docker
+      - publish_docker
     uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@upload-image-to-artifacts
     secrets: inherit
     with:
       environment: 'dev'
-      app_version: '${{ needs.build.outputs.app_version }}'
+      app_version: '${{ needs.build_docker.outputs.app_version }}'
