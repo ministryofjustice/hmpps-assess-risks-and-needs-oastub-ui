@@ -42,33 +42,8 @@ jobs:
       upload_image_artifact: true
       image_artifact_retention_days: 2
 
-#  e2e_test:
-#    needs: [build_docker]
-#    uses: ./.github/workflows/e2e_test.yml
-#    with:
-#      app_version: ${{ needs.build_docker.outputs.app_version }}
-
-  publish_docker:
-    name: Publish docker image
-    needs:
-      - node_build
-      - node_unit_tests
-      - build_docker
-      - helm_lint
-    uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_push.yml@upload-image-to-artifacts
+  e2e_test:
+    needs: [build_docker]
+    uses: ./.github/workflows/e2e_test.yml
     with:
-      docker_registry: 'ghcr.io'
-      registry_org: 'ministryofjustice'
       app_version: ${{ needs.build_docker.outputs.app_version }}
-      tag_latest: false
-
-  deploy_dev:
-    name: Deploy to the development environment
-    needs:
-      - build_docker
-      - publish_docker
-    uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@upload-image-to-artifacts
-    secrets: inherit
-    with:
-      environment: 'dev'
-      app_version: '${{ needs.build_docker.outputs.app_version }}'
