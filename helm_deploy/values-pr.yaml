@@ -16,6 +16,15 @@ generic-service:
     ENVIRONMENT_NAME: PR
     AUDIT_ENABLED: "false"
 
+  extraContainers:
+    - name: wiremock
+      image: "ghcr.io/ministryofjustice/hmpps-wiremock:latest"
+      imagePullPolicy: IfNotPresent
+      ports:
+        - name: http
+          containerPort: 8090
+          protocol: TCP
+
   allowlist:
     groups:
       - circleci
