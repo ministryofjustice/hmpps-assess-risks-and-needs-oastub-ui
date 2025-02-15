@@ -1,0 +1,26 @@
+---
+# Per environment values which override defaults in hmpps-assess-risks-and-needs-oastub-ui/values.yaml
+
+generic-service:
+  replicaCount: 1
+
+  ingress:
+    host: arns-oastub-dev.hmpps.service.justice.gov.uk
+
+  env:
+    INGRESS_URL: "https://arns-oastub-dev.hmpps.service.justice.gov.uk"
+    HMPPS_AUTH_URL: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth"
+    TOKEN_VERIFICATION_API_URL: "https://token-verification-api-dev.prison.service.justice.gov.uk"
+    HMPPS_ARNS_HANDOVER_URL: "https://arns-handover-service-dev.hmpps.service.justice.gov.uk"
+    COORDINATOR_API_URL: "https://arns-coordinator-api-dev.hmpps.service.justice.gov.uk"
+    ENVIRONMENT_NAME: PR
+    AUDIT_ENABLED: "false"
+
+  allowlist:
+    groups:
+      - circleci
+      - internal
+      - prisons
+
+generic-prometheus-alerts:
+  alertSeverity: 

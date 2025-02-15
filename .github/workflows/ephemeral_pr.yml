@@ -60,9 +60,9 @@ jobs:
       app_version: '${{ needs.build_docker.outputs.app_version }}'
       helm_release_name: ${{ needs.prepare_deployment_context.outputs.release_name }}
       helm_additional_args: >-
+        --values 'helm_deploy/values-pr.yaml'
         --set generic-service.ingress.host=${{ needs.prepare_deployment_context.outputs.ingress_host }}
         --set generic-service.image.tag=${{ needs.prepare_deployment_context.outputs.ephemeral_deployment_name }}
         --set generic-service.nameOverride=${{ needs.prepare_deployment_context.outputs.release_name }}
-        --set generic-service.replicaCount=1
         --set generic-prometheus-alerts.targetApplication=${{ needs.prepare_deployment_context.outputs.release_name }}
         --set generic-service.env.EPHEMERAL_DEPLOYMENT_NAME=${{ needs.prepare_deployment_context.outputs.ephemeral_deployment_name }}
