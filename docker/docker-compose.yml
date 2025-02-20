@@ -47,7 +47,6 @@ services:
       HMPPS_ARNS_HANDOVER_URL: http://arns-handover:7070
       COORDINATOR_API_URL: "http://coordinator-api:8080"
       ENVIRONMENT_NAME: DEV
-      EPHEMERAL_DEPLOYMENT_NAME: "PR-80"
       AUDIT_ENABLED: "false"
       PRODUCT_ID: FOO
 
