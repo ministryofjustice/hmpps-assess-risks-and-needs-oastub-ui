@@ -1,6 +1,6 @@
 services:
   oasys-ui:
-    image: quay.io/hmpps/hmpps-assess-risks-and-needs-oastub-ui:local
+    image: ghcr.io/ministryofjustice/hmpps-assess-risks-and-needs-oastub-ui:local
     build:
       target: development
     command: npm run start:dev
