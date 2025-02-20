@@ -1,4 +1,4 @@
-name: Main pipeline [build -> test -> deploy]
+name: Main
 
 on:
   push:
