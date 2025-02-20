@@ -19,22 +19,22 @@ generic-service:
   extraContainers:
     - name: wiremock
       image: "ghcr.io/ministryofjustice/hmpps-wiremock:latest"
-      env:
-        name: 'WIREMOCK_REPOS'
-        value: |
-          [
-            {
-              "repoUrl": "https://github.com/ministryofjustice/hmpps-education-and-work-plan-ui",
-              "branch": "main",
-              "path": "wiremock"
-            },
-            {
-              "repoUrl": "https://github.com/ministryofjustice/hmpps-approved-premises-api",
-              "branch": "main",
-              "path": "wiremock"
-            }
-          ]
       imagePullPolicy: IfNotPresent
+      env:
+        - name: WIREMOCK_REPOS
+          value: |-
+            [
+              {
+                "repoUrl": "https://github.com/ministryofjustice/hmpps-education-and-work-plan-ui",
+                "branch": "main",
+                "path": "wiremock"
+              },
+              {
+                "repoUrl": "https://github.com/ministryofjustice/hmpps-approved-premises-api",
+                "branch": "main",
+                "path": "wiremock"
+              }
+            ]
       ports:
         - name: http
           containerPort: 8090
