@@ -24,7 +24,7 @@ permissions:
 jobs:
   helm_lint:
     name: helm lint
-    uses: ministryofjustice/hmpps-github-actions/.github/workflows/test_helm_lint.yml@upload-image-to-artifacts
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/test_helm_lint.yml@v2
     secrets: inherit
     with:
       environment: ${{ inputs.environment }}
@@ -32,7 +32,7 @@ jobs:
   build_docker:
     if: ${{ inputs.image_tag == '' }}
     name: Build docker image
-    uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_build.yml@upload-image-to-artifacts
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/docker_build.yml@v2
     with:
       docker_registry: 'ghcr.io'
       registry_org: 'ministryofjustice'
@@ -46,7 +46,7 @@ jobs:
     needs:
       - helm_lint
       - build_docker
-    uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@upload-image-to-artifacts
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2
     secrets: inherit
     with:
       environment: ${{ inputs.environment }}
@@ -57,7 +57,7 @@ jobs:
     name: Deploy pre-built image to environment
     needs:
       - helm_lint
-    uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@upload-image-to-artifacts
+    uses: ministryofjustice/hmpps-github-actions/.github/workflows/deploy_env.yml@v2
     secrets: inherit
     with:
       environment: ${{ inputs.environment }}
