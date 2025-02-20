@@ -112,5 +112,5 @@ export default {
   },
   domain: get('INGRESS_URL', 'http://localhost:3000', requiredInProduction),
   environmentName: get('ENVIRONMENT_NAME', ''),
-  ephemeralDeploymentName: get('EPHEMERAL_DEPLOYMENT_NAME', '')
+  ephemeralDeploymentName: get('EPHEMERAL_DEPLOYMENT_NAME', ''),
 }
