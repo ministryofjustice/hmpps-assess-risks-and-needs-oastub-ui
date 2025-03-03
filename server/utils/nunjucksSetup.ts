@@ -15,6 +15,7 @@ export default function nunjucksSetup(app: express.Express, applicationInfo: App
   app.locals.applicationName = 'ARNS OAStub'
   app.locals.environmentName = config.environmentName
   app.locals.environmentNameColour = config.environmentName === 'PRE-PRODUCTION' ? 'govuk-tag--green' : ''
+  app.locals.ephemeralDeploymentName = config.ephemeralDeploymentName
 
   // Cachebusting version string
   if (production) {
