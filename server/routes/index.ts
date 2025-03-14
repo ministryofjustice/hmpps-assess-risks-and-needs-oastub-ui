@@ -23,6 +23,7 @@ export default function routes({ coordinatorService, handoverService }: Services
   post('/', async (req, res, next) => {
     const oasysAssessmentPk = req.body['oasys-assessment-pk']
     const targetService = req.body['target-service']
+    const deploymentName = req.body['deployment-name']
 
     const subjectDetails = {
       crn: req.body.crn,
@@ -142,6 +143,7 @@ export default function routes({ coordinatorService, handoverService }: Services
         criminogenicNeedsData: crimNeedsData,
       },
       targetService,
+      getRedirectUriFromClientId(targetService, deploymentName),
     )
 
     res.render('pages/copy-otl', {
@@ -280,4 +282,16 @@ const generateFakerData = () => ({
 
 const getClientNameFromClientId = (clientId: string) => {
   return fields['target-service'].options.find(option => option.value === clientId).text
+}
+
+const getRedirectUriFromClientId = (clientId: string, deploymentName?: string) => {
+  const baseRedirectUri = [config.strengthsAndNeeds, config.sentencePlan].find(
+    service => service.clientId === clientId,
+  )?.redirectUri
+
+  const url = new URL(baseRedirectUri)
+  if (deploymentName) {
+    url.hostname = `${deploymentName}.${url.hostname}`
+  }
+  return url.toString()
 }
