@@ -1,7 +1,25 @@
 import { asSystem, AuthenticationClient, RestClient } from '@ministryofjustice/hmpps-rest-client'
+import { UUID } from 'crypto'
 import config from '../config'
 import logger from '../../logger'
-import { CreateRequest, CreateResponse } from '../services/coordinatorService'
+
+export interface CreateResponse {
+  sanAssessmentId: UUID
+  sanAssessmentVersion: number
+  sentencePlanId: UUID
+  sentencePlanVersion: number
+}
+
+export interface CreateRequest extends Record<string, unknown> {
+  oasysAssessmentPk: string
+  previousOasysAssessmentPk?: string
+  regionPrisonCode?: number
+  planType: string
+  userDetails: {
+    id: string
+    name: string
+  }
+}
 
 export default class CoordinatorApiClient extends RestClient {
   constructor(authenticationClient: AuthenticationClient) {
