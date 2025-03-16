@@ -1,7 +1,5 @@
 import { UUID } from 'crypto'
-import config from '../config'
-import RestClient from '../data/restClient'
-import HmppsAuthClient from '../data/hmppsAuthClient'
+import { CoordinatorApiClient } from '../data'
 
 export interface CreateResponse {
   sanAssessmentId: UUID
@@ -22,16 +20,9 @@ export interface CreateRequest extends Record<string, unknown> {
 }
 
 export default class CoordinatorService {
-  constructor(private readonly authClient: HmppsAuthClient) {}
-
-  private async restClient(): Promise<RestClient> {
-    const token = await this.authClient.getSystemClientToken()
-    return new RestClient('Coordinator Api Client', config.apis.coordinatorApi, token)
-  }
+  constructor(private readonly coordinatorApiClient: CoordinatorApiClient) {}
 
   async create(requestBody: CreateRequest) {
-    const client = await this.restClient()
-    const responseBody = await client.post({ path: '/oasys/create', data: requestBody })
-    return responseBody as CreateResponse
+    return this.coordinatorApiClient.create(requestBody)
   }
 }
