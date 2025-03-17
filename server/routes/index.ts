@@ -143,7 +143,7 @@ export default function routes({ coordinatorService, handoverService }: Services
         criminogenicNeedsData: crimNeedsData,
       },
       targetService,
-      getRedirectUriFromClientId(targetService, deploymentName),
+      deploymentName && getRedirectUriFromClientId(targetService, deploymentName),
     )
 
     res.render('pages/copy-otl', {
