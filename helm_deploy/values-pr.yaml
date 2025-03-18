@@ -1,36 +1,24 @@
 ---
-# Per environment values which override defaults in hmpps-template-typescript/values.yaml
+# Per environment values which override defaults in hmpps-assess-risks-and-needs-oastub-ui/values.yaml
 
 generic-service:
   nameOverride: $RELEASE_NAME
   replicaCount: 1
 
   ingress:
-    host: pr-$PR_NUMBER.template-typescript-dev.hmpps.service.justice.gov.uk
+    host: pr-$PR_NUMBER.arns-oastub-dev.hmpps.service.justice.gov.uk
 
   env:
-    INGRESS_URL: "https://pr-$PR_NUMBER.template-typescript-dev.hmpps.service.justice.gov.uk"
+    INGRESS_URL: "https://pr-$PR_NUMBER.arns-oastub-dev.hmpps.service.justice.gov.uk"
     HMPPS_AUTH_URL: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth"
-    EXAMPLE_API_URL: 'http://hmpps-template-kotlin:8080'
     TOKEN_VERIFICATION_API_URL: "https://token-verification-api-dev.prison.service.justice.gov.uk"
-    TOKEN_VERIFICATION_ENABLED: false
-    DEPLOYMENT_NAME: PR-$PR_NUMBER
+    HMPPS_ARNS_HANDOVER_URL: "https://arns-handover-service-dev.hmpps.service.justice.gov.uk"
+    COORDINATOR_API_URL: "https://arns-coordinator-api-dev.hmpps.service.justice.gov.uk"
+    SP_HANDOVER_REDIRECT_URI: "https://sentence-plan-dev.hmpps.service.justice.gov.uk/sign-in/callback"
+    SAN_HANDOVER_REDIRECT_URI: "https://strengths-based-needs-assessments-dev.hmpps.service.justice.gov.uk/sign-in/callback"
     ENVIRONMENT_NAME: DEV
+    DEPLOYMENT_NAME: PR-$PR_NUMBER
     AUDIT_ENABLED: "false"
-
-  extraContainers:
-    - name: hmpps-template-kotlin
-      image: ghcr.io/ministryofjustice/hmpps-template-kotlin:latest
-      imagePullPolicy: IfNotPresent
-      env:
-        - name: HMPPS_AUTH_URL
-          value: 'https://sign-in-dev.hmpps.service.justice.gov.uk/auth'
-        - name: EXAMPLE_API_URL
-          value: 'https://hmpps-template-kotlin:8080'
-      ports:
-        - name: http
-          containerPort: 8080
-          protocol: TCP
 
   allowlist:
     groups:
