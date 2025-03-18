@@ -11,3 +11,12 @@
   min-width: 5em;
   max-width: 5em;
 }
+
+.action-shelf {
+  display: flex;
+  align-items: end;
+
+  & > div:not(:last-child) {
+    margin-right: 16px;
+  }
+}

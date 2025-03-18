@@ -13,6 +13,8 @@ generic-service:
     TOKEN_VERIFICATION_API_URL: "https://token-verification-api-dev.prison.service.justice.gov.uk"
     HMPPS_ARNS_HANDOVER_URL: "https://arns-handover-service-dev.hmpps.service.justice.gov.uk"
     COORDINATOR_API_URL: "https://arns-coordinator-api-dev.hmpps.service.justice.gov.uk"
+    SP_HANDOVER_REDIRECT_URI: "https://sentence-plan-dev.hmpps.service.justice.gov.uk/sign-in/callback"
+    SAN_HANDOVER_REDIRECT_URI: "https://strengths-based-needs-assessments-dev.hmpps.service.justice.gov.uk/sign-in/callback"
     ENVIRONMENT_NAME: DEV
     AUDIT_ENABLED: "false"
 
@@ -34,4 +36,4 @@ generic-service:
       - prisons
 
 generic-prometheus-alerts:
-  alertSeverity: 
+  alertSeverity: NON_PROD_ALERTS_SEVERITY_LABEL
