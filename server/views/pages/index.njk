@@ -51,26 +51,25 @@
               }
             }) }}
           </div>
-          <div class="govuk-button-group">
-            {{ govukButton({
-              text: 'Create handover link',
-              classes: "govuk-!-display-inline"
-            }) }}
+          {{ govukButton({
+            text: 'Create handover link',
+            classes: "govuk-!-display-inline"
+          }) }}
+        </div>
+        <div class="govuk-button-group">
+          {{ govukButton({
+            id: "copy-configuration-btn",
+            text: 'Copy configuration',
+            classes: "govuk-button--secondary",
+            type: 'button'
+          }) }}
 
-            {{ govukButton({
-              id: "copy-configuration-btn",
-              text: 'Copy configuration',
-              classes: "govuk-button--secondary",
-              type: 'button'
-            }) }}
-
-            {{ govukButton({
-              id: "paste-configuration-btn",
-              text: 'Paste configuration',
-              classes: "govuk-button--secondary",
-              type: 'button'
-            }) }}
-          </div>
+          {{ govukButton({
+            id: "paste-configuration-btn",
+            text: 'Paste configuration',
+            classes: "govuk-button--secondary",
+            type: 'button'
+          }) }}
         </div>
       </div>
     </div>
