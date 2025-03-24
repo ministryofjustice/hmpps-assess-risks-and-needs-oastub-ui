@@ -1,0 +1,31 @@
+---
+# Per environment values which override defaults in hmpps-assess-risks-and-needs-oastub-ui/values.yaml
+
+generic-service:
+  nameOverride: $RELEASE_NAME
+  replicaCount: 1
+
+  ingress:
+    host: pr-$PR_NUMBER.arns-oastub-dev.hmpps.service.justice.gov.uk
+
+  env:
+    INGRESS_URL: "https://pr-$PR_NUMBER.arns-oastub-dev.hmpps.service.justice.gov.uk"
+    HMPPS_AUTH_URL: "https://sign-in-dev.hmpps.service.justice.gov.uk/auth"
+    TOKEN_VERIFICATION_API_URL: "https://token-verification-api-dev.prison.service.justice.gov.uk"
+    HMPPS_ARNS_HANDOVER_URL: "https://arns-handover-service-dev.hmpps.service.justice.gov.uk"
+    COORDINATOR_API_URL: "https://arns-coordinator-api-dev.hmpps.service.justice.gov.uk"
+    SP_HANDOVER_REDIRECT_URI: "https://sentence-plan-dev.hmpps.service.justice.gov.uk/sign-in/callback"
+    SAN_HANDOVER_REDIRECT_URI: "https://strengths-based-needs-assessments-dev.hmpps.service.justice.gov.uk/sign-in/callback"
+    ENVIRONMENT_NAME: DEV
+    DEPLOYMENT_NAME: PR-$PR_NUMBER
+    AUDIT_ENABLED: "false"
+
+  allowlist:
+    groups:
+      - circleci
+      - internal
+      - prisons
+
+generic-prometheus-alerts:
+  targetApplication: $RELEASE_NAME
+  alertSeverity: NON_PROD_ALERTS_SEVERITY_LABEL
