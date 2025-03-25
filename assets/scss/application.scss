@@ -9,4 +9,5 @@ $govuk-page-width: $moj-page-width;
 
 @import './components/header-bar';
 @import './components/summary-card';
+@import "./components/custom-deployment-banner";
 @import './local';

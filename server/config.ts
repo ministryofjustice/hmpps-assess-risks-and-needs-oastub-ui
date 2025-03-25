@@ -103,13 +103,20 @@ export default {
         deadline: Number(get('HMPPS_ARNS_HANDOVER_TIMEOUT_DEADLINE', 10000)),
       },
       agent: new AgentConfig(Number(get('HMPPS_ARNS_HANDOVER_TIMEOUT_RESPONSE', 10000))),
-      sanClientId: get('SAN_HANDOVER_CLIENT_ID', 'strengths-and-needs-assessment'),
-      spClientId: get('SP_HANDOVER_CLIENT_ID', 'sentence-plan'),
     },
+  },
+  sentencePlan: {
+    clientId: get('SP_HANDOVER_CLIENT_ID', 'sentence-plan'),
+    redirectUri: get('SP_HANDOVER_REDIRECT_URI', 'http://localhost:3000/sign-in/callback'),
+  },
+  strengthsAndNeeds: {
+    clientId: get('SAN_HANDOVER_CLIENT_ID', 'strengths-and-needs-assessment'),
+    redirectUri: get('SAN_HANDOVER_REDIRECT_URI', 'http://localhost:3000/sign-in/callback'),
   },
   sqs: {
     audit: auditConfig(),
   },
   domain: get('INGRESS_URL', 'http://localhost:3000', requiredInProduction),
   environmentName: get('ENVIRONMENT_NAME', ''),
+  deploymentName: get('DEPLOYMENT_NAME', ''),
 }
