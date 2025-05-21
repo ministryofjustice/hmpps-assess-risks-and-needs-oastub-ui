@@ -10,6 +10,7 @@ export default defineConfig({
     configFile: 'reporter-config.json',
   },
   e2e: {
+    baseUrl: 'http://localhost:3000',
     specPattern: ['cypress/e2e/**/*.cy.ts'],
     supportFile: false,
     testIsolation: true,
