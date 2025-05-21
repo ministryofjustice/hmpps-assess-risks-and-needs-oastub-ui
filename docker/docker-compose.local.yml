@@ -1,15 +1,11 @@
 services:
-  coordinator-api:
+  redis:
     ports:
-      - "8070:8080"
+      - "6379:6379"
 
-  san-ui:
+  hmpps-auth:
     ports:
-      - "3000:3000"
-
-  arns-handover:
-    ports:
-      - "7070:7070"
+      - "9090:9090"
 
   oasys-ui:
     ports:
