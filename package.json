@@ -171,6 +171,9 @@
   "overrides": {
     "@jgoz/esbuild-plugin-typecheck": {
       "esbuild": "$esbuild"
+    },
+    "csurf": {
+      "cookie": "1.0.2"
     }
   }
 }
