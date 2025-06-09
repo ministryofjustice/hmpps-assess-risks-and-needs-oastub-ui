@@ -131,7 +131,7 @@ services:
       INGRESS_URL: http://oasys-ui:3000
 
   localstack:
-    image: localstack/localstack:3
+    image: localstack/localstack:4
     networks:
       - hmpps
     container_name: localstack-sqs
