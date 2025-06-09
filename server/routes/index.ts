@@ -60,7 +60,7 @@ export default function routes({ coordinatorService, handoverService }: Services
         },
       })
     } catch (e) {
-      if (e.status === 409) {
+      if (e.status === 409 || e.responseStatus === 409) {
         logger.info(`Association with PK ${oasysAssessmentPk} already exists, continuing`)
       } else {
         throw e
