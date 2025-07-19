@@ -89,7 +89,7 @@
   "dependencies": {
     "@aws-sdk/client-sqs": "^3.812.0",
     "@faker-js/faker": "^9.8.0",
-    "@ministryofjustice/frontend": "^5.1.3",
+    "@ministryofjustice/frontend": "^5.1.4",
     "@ministryofjustice/hmpps-auth-clients": "^0.0.1-alpa.4",
     "@ministryofjustice/hmpps-rest-client": "^0.0.1-alpha.11",
     "agentkeepalive": "^4.6.0",
