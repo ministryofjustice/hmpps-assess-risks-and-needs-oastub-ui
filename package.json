@@ -103,7 +103,7 @@
     "csurf": "^1.11.0",
     "express": "^5.1.0",
     "express-session": "^1.18.1",
-    "govuk-frontend": "^5.10.1",
+    "govuk-frontend": "^5.11.0",
     "helmet": "^8.1.0",
     "http-errors": "^2.0.0",
     "jwt-decode": "^4.0.0",
