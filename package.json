@@ -147,7 +147,7 @@
     "concurrently": "^9.1.2",
     "cypress": "^14.3.3",
     "cypress-multi-reporters": "^2.0.5",
-    "dotenv": "^16.5.0",
+    "dotenv": "^17.0.0",
     "esbuild": "^0.25.4",
     "esbuild-plugin-clean": "^1.0.1",
     "esbuild-plugin-copy": "^2.1.1",
