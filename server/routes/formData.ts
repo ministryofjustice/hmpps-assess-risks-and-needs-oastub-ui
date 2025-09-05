@@ -32,12 +32,24 @@ export default {
     code: 'access-mode',
     text: 'Access mode',
     hint: {
-      text: 'Limit editing capabilities to simulate counter-signing lock',
+      text: 'Limit editing  to simulate counter-signing lock',
       kind: 'text',
     },
     options: [
       { text: 'View only', value: 'READ_ONLY', kind: 'option' },
       { text: 'View and edit', value: 'READ_WRITE', kind: 'option' },
+    ],
+  },
+  'staff-location': {
+    code: 'staff-location',
+    text: 'Location',
+    hint: {
+      text: 'Set the location of staff member to use the prison or community pathway question set.',
+      kind: 'text',
+    },
+    options: [
+      { text: 'Community', value: 'COMMUNITY', kind: 'option' },
+      { text: 'Prison', value: 'PRISON', kind: 'option' },
     ],
   },
 
