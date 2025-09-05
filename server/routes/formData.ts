@@ -32,7 +32,7 @@ export default {
     code: 'access-mode',
     text: 'Access mode',
     hint: {
-      text: 'Limit editing  to simulate counter-signing lock',
+      text: 'Limit editing capabilities to simulate counter-signing lock',
       kind: 'text',
     },
     options: [
