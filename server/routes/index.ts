@@ -42,6 +42,7 @@ export default function routes({ coordinatorService, handoverService }: Services
       identifier: req.body.identifier,
       displayName: req.body['display-name'],
       accessMode: req.body['access-mode'],
+      staffLocation: req.body['staff-location'],
       returnUrl: config.domain,
     }
 
@@ -57,6 +58,7 @@ export default function routes({ coordinatorService, handoverService }: Services
         userDetails: {
           id: user.identifier,
           name: user.displayName,
+          location: user.staffLocation,
         },
       })
     } catch (e) {
