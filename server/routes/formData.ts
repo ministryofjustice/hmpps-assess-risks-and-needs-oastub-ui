@@ -40,6 +40,18 @@ export default {
       { text: 'View and edit', value: 'READ_WRITE', kind: 'option' },
     ],
   },
+  'staff-location': {
+    code: 'staff-location',
+    text: 'Location',
+    hint: {
+      text: 'Set the location of staff member to use the prison or community pathway question set.',
+      kind: 'text',
+    },
+    options: [
+      { text: 'Community', value: 'COMMUNITY', kind: 'option' },
+      { text: 'Prison', value: 'PRISON', kind: 'option' },
+    ],
+  },
 
   // Subject Details
   'oasys-assessment-pk': {
