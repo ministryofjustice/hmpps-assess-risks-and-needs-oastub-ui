@@ -18,6 +18,7 @@ export interface CreateRequest extends Record<string, unknown> {
   userDetails: {
     id: string
     name: string
+    location: string
   }
 }
 
