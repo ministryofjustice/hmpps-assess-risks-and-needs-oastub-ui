@@ -42,6 +42,7 @@ export default function routes({ coordinatorService, handoverService }: Services
       identifier: req.body.identifier,
       displayName: req.body['display-name'],
       accessMode: req.body['access-mode'],
+      staffLocation: req.body['staff-location'],
       returnUrl: config.domain,
     }
 
@@ -57,10 +58,11 @@ export default function routes({ coordinatorService, handoverService }: Services
         userDetails: {
           id: user.identifier,
           name: user.displayName,
+          location: user.staffLocation,
         },
       })
     } catch (e) {
-      if (e.status === 409) {
+      if (e.status === 409 || e.responseStatus === 409) {
         logger.info(`Association with PK ${oasysAssessmentPk} already exists, continuing`)
       } else {
         throw e

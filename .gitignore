@@ -127,3 +127,4 @@ cypress/screenshots/
 */*.iml
 **/Chart.lock
 **/.DS_Store
+volume/
