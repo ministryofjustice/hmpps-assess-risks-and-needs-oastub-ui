@@ -8,6 +8,8 @@ export interface CreateResponse {
   sanAssessmentVersion: number
   sentencePlanId: UUID
   sentencePlanVersion: number
+  aapAssessmentId: UUID
+  aapVersion: number
 }
 
 export interface CreateRequest extends Record<string, unknown> {

@@ -49,6 +49,7 @@ export default function routes({ coordinatorService, handoverService }: Services
     const versions = {
       assessmentVersion: req.body['assessment-version'],
       sentencePlanVersion: req.body['sentence-plan-version'],
+      aapVersion: req.body['arns-assessment-platform'],
     }
 
     try {
@@ -142,6 +143,7 @@ export default function routes({ coordinatorService, handoverService }: Services
         oasysAssessmentPk,
         assessmentVersion: versions.assessmentVersion,
         sentencePlanVersion: versions.sentencePlanVersion,
+        aapVersion: versions.aapVersion,
         criminogenicNeedsData: crimNeedsData,
       },
       targetService,
@@ -287,7 +289,7 @@ const getClientNameFromClientId = (clientId: string) => {
 }
 
 const getRedirectUriFromClientId = (clientId: string, deploymentName?: string) => {
-  const baseRedirectUri = [config.strengthsAndNeeds, config.sentencePlan].find(
+  const baseRedirectUri = [config.strengthsAndNeeds, config.sentencePlan, config.arnsAssessmentPlatform].find(
     service => service.clientId === clientId,
   )?.redirectUri
 
