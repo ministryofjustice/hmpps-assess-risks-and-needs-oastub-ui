@@ -8,7 +8,7 @@ export interface CreateResponse {
   sanAssessmentVersion: number
   sentencePlanId: UUID
   sentencePlanVersion: number
-  aapPlanId: UUID
+  aapAssessmentId: UUID
   aapVersion: number
 }
 
