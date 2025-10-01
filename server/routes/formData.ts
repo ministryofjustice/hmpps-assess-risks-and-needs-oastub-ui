@@ -18,6 +18,14 @@ export default {
       kind: 'text',
     },
   },
+  'aap-version': {
+    code: 'arns-assessment-platform-version',
+    text: 'ARNS Assessment Platform Version',
+    hint: {
+      text: 'Use this to access a specific AAP version',
+      kind: 'text',
+    },
+  },
 
   // Practitioner Details
   identifier: {
@@ -127,6 +135,7 @@ export default {
     options: [
       { text: 'Strengths and Needs Assessment', value: config.strengthsAndNeeds.clientId, kind: 'option' },
       { text: 'Sentence Plan', value: config.sentencePlan.clientId, kind: 'option' },
+      { text: 'ARNS Assessment Platform', value: config.arnsAssessmentPlatform.clientId, kind: 'option' },
     ],
   },
 }

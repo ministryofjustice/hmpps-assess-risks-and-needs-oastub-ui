@@ -113,6 +113,10 @@ export default {
     clientId: get('SAN_HANDOVER_CLIENT_ID', 'strengths-and-needs-assessment'),
     redirectUri: get('SAN_HANDOVER_REDIRECT_URI', 'http://localhost:3000/sign-in/callback'),
   },
+  arnsAssessmentPlatform: {
+    clientId: get('AAP_HANDOVER_CLIENT_ID', 'arns-assessment-platform'),
+    redirectUri: get('AAP_HANDOVER_REDIRECT_URI', 'http://localhost:3000/sign-in/callback'),
+  },
   sqs: {
     audit: auditConfig(),
   },
