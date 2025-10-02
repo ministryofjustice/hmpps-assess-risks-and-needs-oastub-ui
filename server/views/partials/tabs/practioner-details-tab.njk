@@ -28,19 +28,6 @@
 
     {{ govukSelect({
         label: {
-            text: options.fields["staff-location"].text,
-            classes: "govuk-label--m"
-        },
-        id: options.fields["staff-location"].code,
-        name: options.fields["staff-location"].code,
-        hint: options.fields["staff-location"].hint,
-        items: options.fields["staff-location"].options,
-        attributes: {'data-input-group': 'subject' },
-        value: fakerData.subject.staff-location
-    }) }}
-
-    {{ govukSelect({
-        label: {
             text: options.fields["access-mode"].text,
             classes: "govuk-label--m"
         },
