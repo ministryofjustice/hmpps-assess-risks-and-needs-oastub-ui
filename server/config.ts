@@ -107,7 +107,7 @@ export default {
   },
   sentencePlan: {
     clientId: get('SP_HANDOVER_CLIENT_ID', 'sentence-plan'),
-    redirectUri: get('SP_HANDOVER_REDIRECT_URI', 'http://localhost:3000/sign-in/callback'),
+    redirectUri: get('SP_HANDOVER_REDIRECT_URI', 'http://localhost:3000/sign-in/handover/callback'),
   },
   strengthsAndNeeds: {
     clientId: get('SAN_HANDOVER_CLIENT_ID', 'strengths-and-needs-assessment'),
