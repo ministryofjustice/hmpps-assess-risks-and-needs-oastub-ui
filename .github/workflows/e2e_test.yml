@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Download docker image
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: build_image
           path: ${{ runner.temp }}
@@ -50,7 +50,7 @@ jobs:
 
       - name: Upload test results
         if: '!cancelled()'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: e2e_test_results
           path: |
