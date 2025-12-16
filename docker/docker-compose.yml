@@ -7,7 +7,7 @@ services:
       ALLOW_EMPTY_PASSWORD: yes
 
   hmpps-auth:
-    image: quay.io/hmpps/hmpps-auth
+    image: ghcr.io/ministryofjustice/hmpps-auth
     networks:
       - hmpps
     healthcheck:
